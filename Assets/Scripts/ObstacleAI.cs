@@ -12,26 +12,45 @@ public class ObstacleAI : MonoBehaviour
     private float respawnPosition = 15f;  //the position where the obstacle will respawn
     [SerializeField]
     private float randomOffset = 2f;  //used as a range of negative to positive to offset the heighth of the obstacle
+                                      //use 0 for no random offset
 
     private bool playerDead;
+
+    private void Awake()
+    {
+        playerDead = false;
+        PlayerController.PlayerDied += OnPlayerDied;
+        Debug.LogWarning( GetType().Name + " in " + gameObject.name + " is subscribed to PlayerDied");
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.PlayerDied -= OnPlayerDied;
+        Debug.Log("Ground in " + gameObject.name + " is unsubscribed to PlayerDied");
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerController.PlayerDied -= OnPlayerDied;
+        Debug.Log("Ground in " + gameObject.name + "is unsubscribed to PlayerDied");
+    }
 
     void Update()
     {
         if (!playerDead)
         {
             transform.position += Time.deltaTime * speed * Vector3.left;
-        }
-        
 
-        if (transform.position.x <= despawnPosition)
-        {
-            if (randomOffset == 0)
+            if (transform.position.x <= despawnPosition)
             {
-                RespawnObstacle();
-            }
-            else
-            {
-                RespawnObstacle(randomOffset);
+                if (randomOffset == 0)
+                {
+                    RespawnObstacle();
+                }
+                else
+                {
+                    RespawnObstacle(randomOffset);
+                }
             }
         }
     }
@@ -47,5 +66,11 @@ public class ObstacleAI : MonoBehaviour
     {
         float randomHeight = Random.Range(-respawnRandomOffset, respawnRandomOffset);
         transform.position = new Vector3(respawnPosition, randomHeight, transform.position.z);
+    }
+
+    private void OnPlayerDied()
+    {
+        Debug.Log("OnPlayerDied() in " + gameObject.name + " has fired.");
+        playerDead = true;
     }
 }
