@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void OnPlayerDied()
     {
+        DebugMessages.OriginatingEventFired(this, "OnPlayerDied()");
         PlayerDied?.Invoke();
         playerDead = true;
     }

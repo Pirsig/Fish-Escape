@@ -9,25 +9,25 @@ public class GameOverDisplay : MonoBehaviour
     {
         //display = this.gameObject;
         PlayerController.PlayerDied += OnPlayerDied;
-        Debug.Log("GameOverDisplay in " + gameObject.name + " is subscribed to PlayerDied");
+        DebugMessages.ClassInObjectSubscribed(this, "PlayerDied");
         gameObject.SetActive(!showOnPlayerDied);
     }
 
     private void OnDestroy()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
-        Debug.Log("GameOverDisplay in " + gameObject.name + " is unsubscribed to PlayerDied");
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
     }
 
     private void OnApplicationQuit()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
-        Debug.Log("GameOverDisplay in " + gameObject.name + "is unsubscribed to PlayerDied");
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
     }
 
     public void OnPlayerDied()
     {
-        Debug.Log("OnPlayerDied() in " + gameObject.name + " has fired.");
+        DebugMessages.EventFired(this, "OnPlayerDied()");
         gameObject.SetActive(showOnPlayerDied);
     }
 }

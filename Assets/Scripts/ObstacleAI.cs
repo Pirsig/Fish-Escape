@@ -20,19 +20,19 @@ public class ObstacleAI : MonoBehaviour
     {
         playerDead = false;
         PlayerController.PlayerDied += OnPlayerDied;
-        Debug.LogWarning( GetType().Name + " in " + gameObject.name + " is subscribed to PlayerDied");
+        DebugMessages.ClassInObjectSubscribed(this, "PlayerDied");
     }
 
     private void OnDestroy()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
-        Debug.Log("Ground in " + gameObject.name + " is unsubscribed to PlayerDied");
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
     }
 
     private void OnApplicationQuit()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
-        Debug.Log("Ground in " + gameObject.name + "is unsubscribed to PlayerDied");
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class ObstacleAI : MonoBehaviour
 
     private void OnPlayerDied()
     {
-        Debug.Log("OnPlayerDied() in " + gameObject.name + " has fired.");
+        DebugMessages.EventFired(this, "OnPlayerDied()");
         playerDead = true;
     }
 }
