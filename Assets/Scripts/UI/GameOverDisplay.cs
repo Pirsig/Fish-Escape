@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameOverDisplay : MonoBehaviour
 {
@@ -11,19 +9,25 @@ public class GameOverDisplay : MonoBehaviour
     {
         //display = this.gameObject;
         PlayerController.PlayerDied += OnPlayerDied;
-        Debug.Log("GameOverDisplay is subscribed to PlayerDied");
+        Debug.Log("GameOverDisplay in " + gameObject.name + " is subscribed to PlayerDied");
         gameObject.SetActive(!showOnPlayerDied);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.PlayerDied -= OnPlayerDied;
+        Debug.Log("GameOverDisplay in " + gameObject.name + " is unsubscribed to PlayerDied");
     }
 
     private void OnApplicationQuit()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
-        Debug.Log("GameOverDisplay is unsubscribed to PlayerDied");
+        Debug.Log("GameOverDisplay in " + gameObject.name + "is unsubscribed to PlayerDied");
     }
 
     public void OnPlayerDied()
     {
-        Debug.Log("OnPlayerDied() in GameOverDisplay has fired.");
+        Debug.Log("OnPlayerDied() in " + gameObject.name + " has fired.");
         gameObject.SetActive(showOnPlayerDied);
     }
 }
