@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82cacfeb09235b344a85a659ae443547, type: 3}
   m_Name: PlayerScore
   m_EditorClassIdentifier: 
-  developerDescription: 
-  value: 0
+  developerDescription: Used to store player score
+  value: 1780
