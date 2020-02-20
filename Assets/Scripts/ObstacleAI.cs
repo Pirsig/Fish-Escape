@@ -49,23 +49,30 @@ public class ObstacleAI : MonoBehaviour
                 }
                 else
                 {
-                    RespawnObstacle(randomOffset);
+                    RespawnObstacleRandomY(randomOffset);
                 }
             }
         }
     }
 
-    //moves the obstacle back to it's starting position along the x axis
+    //moves the obstacle back to its respawn position along the x axis
     private void RespawnObstacle()
     {
         transform.position = new Vector3(respawnPosition, transform.position.y, transform.position.z);
     }
 
-    //moves the obstacle back to it's starting position along the x axis with a new random heighth in the range given
-    private void RespawnObstacle(float respawnRandomOffset)
+    //moves the obstacle back to its respawn position along the x axis with a new random heighth in the range given
+    private void RespawnObstacleRandomY(float randomOffset)
     {
-        float randomHeight = Random.Range(-respawnRandomOffset, respawnRandomOffset);
-        transform.position = new Vector3(respawnPosition, randomHeight, transform.position.z);
+        float randomYPosition = Random.Range(-randomOffset, randomOffset);
+        transform.position = new Vector3(respawnPosition, randomYPosition, transform.position.z);
+    }
+
+    //Moves the obstacle back to a random offset from the respawn position along the x axis
+    private void RespawnObstacleRandomX(float randomOffset)
+    {
+        float randomXPosition = Random.Range(-randomOffset, randomOffset);
+        transform.position = new Vector3(respawnPosition + randomXPosition, transform.position.y, transform.position.z);
     }
 
     private void OnPlayerDied()
