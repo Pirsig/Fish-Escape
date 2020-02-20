@@ -15,6 +15,10 @@ public class ScoreZone : MonoBehaviour
 
     //Multiplier to increase score value as we go further into the game
     public float scoreMultiplier = 1f;
+    public float scoreMultiplierIncrease = 0.5f;
+
+    public delegate void PlayerScoredEventHandler();
+    public static event PlayerScoredEventHandler PlayerScored;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,6 +26,14 @@ public class ScoreZone : MonoBehaviour
         {
             score.Value += zoneScoreValue * scoreMultiplier;
             Debug.Log("score = " + score);
+            OnPlayerScored();
         }
+    }
+
+    protected virtual void OnPlayerScored()
+    {
+        DebugMessages.OriginatingEventFired(this, "OnPlayerScored()");
+        PlayerScored?.Invoke();
+        scoreMultiplier += scoreMultiplierIncrease;
     }
 }
