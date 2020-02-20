@@ -11,8 +11,11 @@ public class ObstacleAI : MonoBehaviour
     [SerializeField]
     private float respawnPosition = 15f;  //the position where the obstacle will respawn
     [SerializeField]
-    private float randomOffset = 2f;  //used as a range of negative to positive to offset the heighth of the obstacle
+    private float randomYOffset = 2f;  //used as a range of negative to positive to offset the heighth of the obstacle
                                       //use 0 for no random offset
+    [SerializeField]
+    private float randomXOffset = 0;    //used as a range of negative to positive to offset the left/right position of the obstacle
+                                        //use 0 for no random offset
 
     private bool playerDead;
 
@@ -43,13 +46,21 @@ public class ObstacleAI : MonoBehaviour
 
             if (transform.position.x <= despawnPosition)
             {
-                if (randomOffset == 0)
+                if (randomYOffset == 0 && randomXOffset == 0)
                 {
                     RespawnObstacle();
                 }
+                else if (randomXOffset == 0 && randomYOffset != 0)
+                {
+                    RespawnObstacle(randomYOffset);
+                }
+                else if (randomXOffset != 0 && randomYOffset != 0)
+                {
+                    RespawnObstacle(randomXOffset, randomYOffset);
+                }
                 else
                 {
-                    RespawnObstacleRandomY(randomOffset);
+                    DebugMessages.ClassInObjectFatalError(this, "Method failed all checks for which version of respawnObstacle() to call");
                 }
             }
         }
@@ -62,17 +73,18 @@ public class ObstacleAI : MonoBehaviour
     }
 
     //moves the obstacle back to its respawn position along the x axis with a new random heighth in the range given
-    private void RespawnObstacleRandomY(float randomOffset)
+    private void RespawnObstacle(float randomYOffset)
     {
-        float randomYPosition = Random.Range(-randomOffset, randomOffset);
+        float randomYPosition = Random.Range(-randomYOffset, randomYOffset);
         transform.position = new Vector3(respawnPosition, randomYPosition, transform.position.z);
     }
 
-    //Moves the obstacle back to a random offset from the respawn position along the x axis
-    private void RespawnObstacleRandomX(float randomOffset)
+    //Moves the obstacle back to a random offset from the respawn position along the x axis, and a random heighth along y
+    private void RespawnObstacle(float randomXOffset, float randomYOffset)
     {
-        float randomXPosition = Random.Range(-randomOffset, randomOffset);
-        transform.position = new Vector3(respawnPosition + randomXPosition, transform.position.y, transform.position.z);
+        float randomXPosition = Random.Range(-randomXOffset, randomXOffset);
+        float randomYPosition = Random.Range(-randomYOffset, randomXOffset);
+        transform.position = new Vector3(respawnPosition + randomXPosition, randomYPosition, transform.position.z);
     }
 
     private void OnPlayerDied()
