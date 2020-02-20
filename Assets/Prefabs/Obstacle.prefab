@@ -829,7 +829,8 @@ MonoBehaviour:
   speed: 2.5
   despawnPosition: -15
   respawnPosition: 15
-  randomOffset: 2
+  randomYOffset: 2
+  randomXOffset: 0
 --- !u!1 &9065889740073037559
 GameObject:
   m_ObjectHideFlags: 0
