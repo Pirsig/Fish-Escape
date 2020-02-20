@@ -7,6 +7,7 @@ public class ObstacleAI : MonoBehaviour
     [SerializeField]
     private float baseSpeed = 1f;   //The base movement speed of the obstacle
     private float currentSpeed;  //the current speed for movement
+    public float CurrentSpeed { get => currentSpeed; }
     [SerializeField]
     private float speedIncrease = 0.1f;    //The amount to increase the speed multiplier by when it is increased
 
