@@ -27,4 +27,18 @@ public static class DebugMessages
     {
         Debug.Log("Originating event " + eventName + " in " + caller.gameObject.name + " has fired.");
     }
+
+    //Use to indicate when a method has tried to do something it cannot do
+    public static void ClassInObjectFatalError(Component caller)
+    {
+        Debug.LogError(caller.GetType().Name + " in " + caller.gameObject.name + " has suffered a fatal error!!!");
+    }
+
+    //Use to indicate when a method has tried to do something it cannot do
+    //Overload to allow custom error message to follow
+    public static void ClassInObjectFatalError(Component caller, string customErrorMessage)
+    {
+        Debug.LogError(caller.GetType().Name + " in " + caller.gameObject.name + " has suffered a fatal error!!!");
+        Debug.LogError(customErrorMessage);
+    }
 }
