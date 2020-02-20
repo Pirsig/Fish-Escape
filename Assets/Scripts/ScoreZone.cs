@@ -18,15 +18,29 @@ public class ScoreZone : MonoBehaviour
     public float scoreMultiplierIncrease = 0.5f;
 
     public delegate void PlayerScoredEventHandler();
-    public static event PlayerScoredEventHandler PlayerScored;
-    
-    private ObstacleAI firstObstacleAI;
-    private float currentSpeed;
+    public static event PlayerScoredEventHandler PlayerScored;    
 
     private void Awake()
     {
-        firstObstacleAI = GameObject.Find("Obstacle 1").GetComponent<ObstacleAI>();
-        currentSpeed = firstObstacleAI.CurrentSpeed;
+        score.Value = 0;
+        ObstacleAI.SpeedChanged += OnSpeedChanged;
+        DebugMessages.ClassInObjectSubscribed(this, "SpeedChanged");
+    }
+
+    private void OnDestroy()
+    {
+        //Unsubscribe to all events
+
+        ObstacleAI.SpeedChanged -= OnSpeedChanged;
+        DebugMessages.ClassInObjectUnsubscribed(this, "SpeedChanged");
+    }
+
+    private void OnApplicationQuit()
+    {
+        //Unsubscribe to all events
+
+        ObstacleAI.SpeedChanged -= OnSpeedChanged;
+        DebugMessages.ClassInObjectUnsubscribed(this, "SpeedChanged");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,12 +55,13 @@ public class ScoreZone : MonoBehaviour
 
     protected virtual void OnPlayerScored()
     {
-        DebugMessages.OriginatingEventFired(this, "OnPlayerScored()");
+        DebugMessages.OriginatingEventFired(this, "PlayerScored");
         PlayerScored?.Invoke();
-        if (currentSpeed != firstObstacleAI.CurrentSpeed)
-        {
-            currentSpeed = firstObstacleAI.CurrentSpeed;
-            scoreMultiplier += scoreMultiplierIncrease;
-        }
+    }
+
+    private void OnSpeedChanged()
+    {
+        DebugMessages.EventFired(this, "SpeedChanged");
+        scoreMultiplier += scoreMultiplierIncrease;
     }
 }

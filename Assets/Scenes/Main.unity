@@ -236,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660736, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_Name
-      value: Seaweed (4)
+      value: Obstacle 5
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
@@ -491,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660736, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_Name
-      value: Seaweed (5)
+      value: Obstacle 6
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
@@ -715,7 +715,7 @@ PrefabInstance:
     - target: {fileID: 5806629095608655057, guid: cf620a2b5d902914086547f5ed9eeba2,
         type: 3}
       propertyPath: m_Name
-      value: ObstacleHook
+      value: Obstacle 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf620a2b5d902914086547f5ed9eeba2, type: 3}
@@ -863,7 +863,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660736, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_Name
-      value: Seaweed (2)
+      value: Obstacle 3
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
@@ -1169,7 +1169,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660736, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_Name
-      value: Seaweed (1)
+      value: Obstacle 2
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
@@ -1418,10 +1418,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  baseSpeed: 1
+  speedIncrease: 0.1
+  maxObstaclesPassed: 15
   despawnPosition: -15
   respawnPosition: 15
-  randomOffset: 0
+  randomYOffset: 0
+  randomXOffset: 2
 --- !u!212 &1398313562
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1846,10 +1849,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  baseSpeed: 1
+  speedIncrease: 0.1
+  maxObstaclesPassed: 15
   despawnPosition: -15
   respawnPosition: 15
-  randomOffset: 0
+  randomYOffset: 0
+  randomXOffset: 2
 --- !u!212 &1684740123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1944,10 +1950,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  baseSpeed: 1
+  speedIncrease: 0.1
+  maxObstaclesPassed: 15
   despawnPosition: -15
   respawnPosition: 15
-  randomOffset: 0
+  randomYOffset: 0
+  randomXOffset: 2
 --- !u!212 &1697225770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2709,7 +2718,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660736, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_Name
-      value: Seaweed
+      value: Obstacle 1
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
