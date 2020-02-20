@@ -18,4 +18,9 @@ public static class DebugMessages
     {
         Debug.Log(eventName + " in " + caller.gameObject.name + " has fired.");
     }
+
+    public static void OriginatingEventFired(Component caller, string eventName)
+    {
+        Debug.Log("Originating event " + eventName + " in " + caller.gameObject.name + " has fired.");
+    }
 }
