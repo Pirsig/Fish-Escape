@@ -1297,7 +1297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d415ec48a6ac248beecfa7f5ea9f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
+  mixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
+  mixerKey: BGMVolume
 --- !u!1 &1181817496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1422,7 @@ PrefabInstance:
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1477,6 +1478,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1091732392}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SavePlayerPrefs
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642782, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -2246,6 +2272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1629359855}
+  - component: {fileID: 1629359856}
   m_Layer: 5
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -2274,6 +2301,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1629359856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629359854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4f31fb406246f4796f0fea0f9081f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyToLoad: BGMVolume
 --- !u!224 &1745826759 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 774999667024642783, guid: f6fde56338541f44e92099207caeb392,
@@ -2422,6 +2462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
+  mixerKey: BGMVolume
   defaultTimesToLoop: 1
   music:
   - name: MenuMusic1

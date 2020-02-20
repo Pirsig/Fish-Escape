@@ -6,7 +6,7 @@ public class BGMController : MonoBehaviour
     private AudioSource musicSource;
 
     public AudioMixer mixer;
-    public string mixerKey;
+    public string mixerKey; //The key we want to use in playerprefs to store this mixer's volume.
 
     private float timePlayed = 0f;
     public int defaultTimesToLoop = 1;
