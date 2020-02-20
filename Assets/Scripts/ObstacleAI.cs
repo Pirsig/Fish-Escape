@@ -28,6 +28,9 @@ public class ObstacleAI : MonoBehaviour
 
     private bool playerDead;
 
+    public delegate void SpeedChangedEventHandler();
+    public static event SpeedChangedEventHandler SpeedChanged;
+
     private void Awake()
     {
         currentSpeed = baseSpeed;
@@ -145,6 +148,8 @@ public class ObstacleAI : MonoBehaviour
         transform.position = new Vector3(respawnPosition + randomXPosition, randomYPosition, transform.position.z);
     }
 
+    //EVENT FUNCTIONS
+
     private void OnPlayerDied()
     {
         DebugMessages.EventFired(this, "OnPlayerDied()");
@@ -160,5 +165,11 @@ public class ObstacleAI : MonoBehaviour
             currentSpeed += speedIncrease;
             obstaclesPassed = 0;
         }
+    }
+
+    protected virtual void OnSpeedChanged()
+    {
+        DebugMessages.OriginatingEventFired(this, "OnSpeedChanged()");
+        SpeedChanged?.Invoke();
     }
 }
