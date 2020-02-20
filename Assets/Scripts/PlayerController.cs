@@ -19,17 +19,19 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerDiedEventHandler();
     public static event PlayerDiedEventHandler PlayerDied;
+    private bool playerDead;
 
     //public event EventHandler PlayerDied;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerDead = false;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !playerDead)
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce);
@@ -54,5 +56,6 @@ public class PlayerController : MonoBehaviour
     protected virtual void OnPlayerDied()
     {
         PlayerDied?.Invoke();
+        playerDead = true;
     }
 }
