@@ -19,6 +19,15 @@ public class ScoreZone : MonoBehaviour
 
     public delegate void PlayerScoredEventHandler();
     public static event PlayerScoredEventHandler PlayerScored;
+    
+    private ObstacleAI firstObstacleAI;
+    private float currentSpeed;
+
+    private void Awake()
+    {
+        firstObstacleAI = GameObject.Find("Obstacle 1").GetComponent<ObstacleAI>();
+        currentSpeed = firstObstacleAI.CurrentSpeed;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,6 +43,10 @@ public class ScoreZone : MonoBehaviour
     {
         DebugMessages.OriginatingEventFired(this, "OnPlayerScored()");
         PlayerScored?.Invoke();
-        scoreMultiplier += scoreMultiplierIncrease;
+        if (currentSpeed != firstObstacleAI.CurrentSpeed)
+        {
+            currentSpeed = firstObstacleAI.CurrentSpeed;
+            scoreMultiplier += scoreMultiplierIncrease;
+        }
     }
 }
