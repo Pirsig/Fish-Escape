@@ -5,7 +5,15 @@ using UnityEngine;
 public class ObstacleAI : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 1f;  //Speed multiplier for movement
+    private float baseSpeed = 1f;   //The base movement speed of the obstacle
+    private float currentSpeed;  //the current speed for movement
+    [SerializeField]
+    private float speedIncrease = 0.1f;    //The amount to increase the speed multiplier by when it is increased
+
+    [SerializeField]
+    private int maxObstaclesPassed = 15; //the amount of obstacles to pass before we increase the speed
+    private int obstaclesPassed;
+
     [SerializeField]
     private float despawnPosition = -15f;  //the position at which the obstacle will despawn
     [SerializeField]
@@ -21,28 +29,46 @@ public class ObstacleAI : MonoBehaviour
 
     private void Awake()
     {
+        currentSpeed = baseSpeed;
+        obstaclesPassed = 0;
         playerDead = false;
+
+        //Event Subscriptions
+
         PlayerController.PlayerDied += OnPlayerDied;
         DebugMessages.ClassInObjectSubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored += OnPlayerScored;
+        DebugMessages.ClassInObjectSubscribed(this, "PlayerScored");
     }
 
     private void OnDestroy()
     {
+        //Unsubscribe to all events
+
         PlayerController.PlayerDied -= OnPlayerDied;
         DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored -= OnPlayerScored;
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerScored");
     }
 
     private void OnApplicationQuit()
     {
+        //Unsubscribe to all events
+
         PlayerController.PlayerDied -= OnPlayerDied;
         DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored -= OnPlayerScored;
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerScored");
     }
 
     void Update()
     {
         if (!playerDead)
         {
-            transform.position += Time.deltaTime * speed * Vector3.left;
+            transform.position += Time.deltaTime * currentSpeed * Vector3.left;
 
             if (transform.position.x <= despawnPosition)
             {
@@ -122,5 +148,16 @@ public class ObstacleAI : MonoBehaviour
     {
         DebugMessages.EventFired(this, "OnPlayerDied()");
         playerDead = true;
+    }
+
+    private void OnPlayerScored()
+    {
+        DebugMessages.EventFired(this, "OnPlayerScored()");
+        obstaclesPassed++;
+        if (obstaclesPassed >= maxObstaclesPassed)
+        {
+            currentSpeed += speedIncrease;
+            obstaclesPassed = 0;
+        }
     }
 }
