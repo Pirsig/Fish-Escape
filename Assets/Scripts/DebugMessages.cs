@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime;
 
 public static class DebugMessages
 {
@@ -40,5 +41,23 @@ public static class DebugMessages
     {
         Debug.LogError(caller.GetType().Name + " in " + caller.gameObject.name + " has suffered a fatal error!!!");
         Debug.LogError(customErrorMessage);
+    }
+
+    //Used to indicate the output of one float operation in a method
+    public static void SimpleMethodOutput(Component caller, float output, string outputName, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + outputName + " = " + output);
+    }
+
+    //Returns the calling method's name
+    public static string GetCallingMethod([System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+    {
+        return memberName;
+    }
+
+    //Way to return variable name, need to look into using this properly
+    public static string GetVariableName<T>(T item) where T : class
+    {
+        return typeof(T).GetProperties()[0].Name;
     }
 }
