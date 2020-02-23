@@ -89,20 +89,19 @@ public class CluelessFishAI : MonoBehaviour
 
     public IEnumerator StartFollowingPlayer()
     {
-        int debugCounter = 0;
+        //int debugCounter = 0;
         Vector3 transitionStartPosition = transform.position;
-        Vector3 transitionTargetPosition = new Vector3(-UnityEngine.Random.Range(0.5f, xBehindPlayerRange), randomYPosition, 0);
+        Vector3 transitionTargetPosition = new Vector3( (-2.5f - UnityEngine.Random.Range(0f, xBehindPlayerRange)), randomYPosition, 0);
         Timer moveTimer = new Timer(collectionTransitionTime);
         while(!moveTimer.TimerCompleted)
         {
-            float deltaTime = Time.deltaTime;
-            transform.position = Vector3.Lerp(transitionStartPosition, transitionTargetPosition, moveTimer.CurrentTime / deltaTime);
-            moveTimer.UpdateTimer(deltaTime);
-            debugCounter++;
-            DebugMessages.SimpleMethodOutput(this, debugCounter, "debugCounter");
-            DebugMessages.SimpleMethodOutput(this, deltaTime, "deltaTime");
+            transform.position = Vector3.Lerp(transitionStartPosition, transitionTargetPosition, moveTimer.CurrentTime / moveTimer.MaxTime);
+            moveTimer.UpdateTimer(Time.deltaTime);
+            //debugCounter++;
+            //DebugMessages.SimpleMethodOutput(this, debugCounter, "debugCounter");
             yield return new WaitForEndOfFrame();
         }
         transitionCompleted = true;
+        Debug.LogWarning("StartFollowingPlayer() coroutine has ended!");
     }
 }
