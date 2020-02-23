@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CluelessFishAI : MonoBehaviour
@@ -18,8 +16,9 @@ public class CluelessFishAI : MonoBehaviour
     [SerializeField]
     private float xBehindPlayerRange;
     [SerializeField]
-    private float collectionTransitionTime = 2f;
-    private bool transitionCompleted;
+    private float xOffsetBehindPlayer = 2.5f;
+    [SerializeField]
+    private float movementTransitionTime = 2f;
 
     //Has the player collected the fish
     private bool collected = false;
@@ -33,6 +32,7 @@ public class CluelessFishAI : MonoBehaviour
     //the tag used to identify the player
     [SerializeField]
     private string playerTag;
+    public GameObject player;
 
     private void Awake()
     {
@@ -42,7 +42,6 @@ public class CluelessFishAI : MonoBehaviour
 
     private void Update()
     {
-        
         if(!collected)
         {
             yChangeTimer.UpdateTimer(Time.deltaTime);
@@ -52,15 +51,6 @@ public class CluelessFishAI : MonoBehaviour
                 yChangeTimer.ResetTimer();
             }
             transform.position += Time.deltaTime * speed * new Vector3(1, randomYPosition, 0); 
-        }
-        else if (collected && transitionCompleted)
-        {
-            //move in a way that follows the player
-            Debug.Log("movement following goes here");
-        }
-        else
-        {
-            
         }
     }
 
@@ -89,10 +79,13 @@ public class CluelessFishAI : MonoBehaviour
 
     public IEnumerator StartFollowingPlayer()
     {
+        DebugMessages.CoroutineStarted(this);
         //int debugCounter = 0;
         Vector3 transitionStartPosition = transform.position;
-        Vector3 transitionTargetPosition = new Vector3( (-2.5f - UnityEngine.Random.Range(0f, xBehindPlayerRange)), randomYPosition, 0);
-        Timer moveTimer = new Timer(collectionTransitionTime);
+        Vector3 transitionTargetPosition = new Vector3( (-xOffsetBehindPlayer - UnityEngine.Random.Range(0f, xBehindPlayerRange)), randomYPosition, 0);
+        DebugMessages.SimpleVariableOutput(this, transitionStartPosition, nameof(transitionStartPosition));
+        DebugMessages.SimpleVariableOutput(this, transitionTargetPosition, nameof(transitionTargetPosition));
+        Timer moveTimer = new Timer(movementTransitionTime);
         while(!moveTimer.TimerCompleted)
         {
             transform.position = Vector3.Lerp(transitionStartPosition, transitionTargetPosition, moveTimer.CurrentTime / moveTimer.MaxTime);
@@ -101,7 +94,39 @@ public class CluelessFishAI : MonoBehaviour
             //DebugMessages.SimpleMethodOutput(this, debugCounter, "debugCounter");
             yield return new WaitForEndOfFrame();
         }
-        transitionCompleted = true;
-        Debug.LogWarning("StartFollowingPlayer() coroutine has ended!");
+        StartCoroutine("FollowPlayer");
+        DebugMessages.CoroutineEnded(this);
+        //Debug.LogWarning("StartFollowingPlayer() coroutine has ended!");
+    }
+
+    //mimics loosely following the player by creating boundaries based on the player's current position as well as
+    //xOffsetBehindPlayer, xBehindPlayerRange, and ySwimmingRange
+    public IEnumerator FollowPlayer()
+    {
+        DebugMessages.CoroutineStarted(this);
+
+        //Timer for how long we want to take for each movement
+        Timer changeMovementTimer = new Timer(movementTransitionTime);
+        Vector3 startPosition = transform.position;
+
+        //random percent to lerp for choosing a new position
+        float randomPos = Random.Range(0f, 1f);
+        //Define our new boundaries based on the player's current location
+        Vector3 lowerFollowBoundary = new Vector3(-xOffsetBehindPlayer - xBehindPlayerRange, player.transform.position.y - ySwimmingRange, 0);
+        Vector3 upperFollowBoundary = new Vector3(-xOffsetBehindPlayer, player.transform.position.y + ySwimmingRange, 0);
+        //Choose a new position to go to within our boundaries
+        Vector3 newPosition = Vector3.Lerp(lowerFollowBoundary, upperFollowBoundary, randomPos);
+
+        //Moves from startPosition to newPosition over the length of changeMovementTimer
+        while (!changeMovementTimer.TimerCompleted)
+        {
+            transform.position = Vector3.Lerp(startPosition, newPosition, changeMovementTimer.CurrentTime / changeMovementTimer.MaxTime);
+            changeMovementTimer.UpdateTimer(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        //restarts the coroutine so we continue moving
+        StartCoroutine("FollowPlayer");
+        DebugMessages.CoroutineEnded(this);
     }
 }
