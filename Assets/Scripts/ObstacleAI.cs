@@ -164,6 +164,7 @@ public class ObstacleAI : MonoBehaviour
         {
             currentSpeed += speedIncrease;
             obstaclesPassed = 0;
+            OnSpeedChanged();
         }
     }
 

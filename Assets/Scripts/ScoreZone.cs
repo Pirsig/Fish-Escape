@@ -18,13 +18,34 @@ public class ScoreZone : MonoBehaviour
     public float scoreMultiplierIncrease = 0.5f;
 
     public delegate void PlayerScoredEventHandler();
-    public static event PlayerScoredEventHandler PlayerScored;    
+    public static event PlayerScoredEventHandler PlayerScored;
+    
+    private float timeFromLastSpeedChanged = 0;
+    private bool recentOnSpeedChanged = false;
 
     private void Awake()
     {
         score.Value = 0;
+
+        //Subscribe to events
+
         ObstacleAI.SpeedChanged += OnSpeedChanged;
         DebugMessages.ClassInObjectSubscribed(this, "SpeedChanged");
+    }
+
+    private void Update()
+    {
+        if(recentOnSpeedChanged)
+        {
+            if(timeFromLastSpeedChanged<1)
+            {
+                timeFromLastSpeedChanged += Time.deltaTime;
+            }
+            else
+            {
+                recentOnSpeedChanged = false;
+            }
+        }
     }
 
     private void OnDestroy()
@@ -47,7 +68,7 @@ public class ScoreZone : MonoBehaviour
     {
         if (collision.tag == playerTag)
         {
-            score.Value += zoneScoreValue * scoreMultiplier;
+            score.Value += ScoreValue(zoneScoreValue);
             Debug.Log("score = " + score);
             OnPlayerScored();
         }
@@ -61,7 +82,23 @@ public class ScoreZone : MonoBehaviour
 
     private void OnSpeedChanged()
     {
-        DebugMessages.EventFired(this, "SpeedChanged");
-        scoreMultiplier += scoreMultiplierIncrease;
+        if(!recentOnSpeedChanged)
+        {
+            DebugMessages.EventFired(this, "SpeedChanged");
+            scoreMultiplier += scoreMultiplierIncrease;
+            recentOnSpeedChanged = true;
+        }
+        //ObstacleAI.SpeedChanged -= OnSpeedChanged;
+    }
+
+    private float ScoreValue(float baseScore)
+    {
+        float scoreValue;
+
+        scoreValue = baseScore * scoreMultiplier;
+
+        DebugMessages.SimpleMethodOutput(this, scoreValue, "scoreValue");
+
+        return scoreValue;
     }
 }

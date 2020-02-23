@@ -828,8 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 2
   speedIncrease: 0.1
-  maxObstaclesPassed: 15
-  obstaclesPassed: {fileID: 11400000, guid: fc751d07c5241e84fa734419278feabe, type: 2}
+  maxObstaclesPassed: 5
   despawnPosition: -15
   respawnPosition: 15
   randomYOffset: 2
