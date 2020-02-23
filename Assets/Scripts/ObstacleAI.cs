@@ -72,6 +72,7 @@ public class ObstacleAI : MonoBehaviour
     {
         if (!playerDead)
         {
+            //Moves the obstacle to the left
             transform.position += Time.deltaTime * currentSpeed * Vector3.left;
 
             if (transform.position.x <= despawnPosition)
