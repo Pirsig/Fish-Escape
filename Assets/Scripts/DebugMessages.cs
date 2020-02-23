@@ -73,6 +73,16 @@ public static class DebugMessages
         Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + nameOfOutput + " = " + output.ToString());
     }
 
+    public static void CoroutineStarted(Component caller, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.LogWarning(methodName + " coroutine from " + caller.GetType().Name + " in " + caller.gameObject.name + " has started.");
+    }
+
+    public static void CoroutineEnded(Component caller, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.LogWarning(methodName + " coroutine from " + caller.GetType().Name + " in " + caller.gameObject.name + " has ended.");
+    }
+
     /*
     //Returns the calling method's name
     public static string GetCallingMethod([System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
