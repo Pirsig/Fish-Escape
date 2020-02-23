@@ -43,27 +43,48 @@ public static class DebugMessages
         Debug.LogError(customErrorMessage);
     }
 
-    //Used to indicate the output of one float operation in a method
-    public static void SimpleMethodOutput(Component caller, float output, string outputName, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    /*  SimpleVariableOutput()
+     *  
+     *  Used to indicate the output of one variable in a method, has overloads for various types
+     *  !Important!
+     *  Use nameOf(variable) in the nameOfOutput variable to have consistency even if the variable name is changed without having to manually change strings*/
+     
+    //Used to indicate the output of one in variable in a method.
+    public static void SimpleVariableOutput(Component caller, int output, string nameOfOutput, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
     {
-        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + outputName + " = " + output);
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + nameOfOutput + " = " + output.ToString());
     }
 
-    //Used to indicate the output of one float operation in a method
-    public static void SimpleMethodOutput(Component caller, int output, string outputName, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    //Used to indicate the output of one float variable in a method.
+    public static void SimpleVariableOutput(Component caller, float output, string nameOfOutput, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
     {
-        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + outputName + " = " + output);
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + nameOfOutput + " = " + output.ToString());
     }
 
+    //Used to indicate the output of one Vector3 variable in a method.
+    public static void SimpleVariableOutput(Component caller, Vector3 output, string nameOfOutput, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + nameOfOutput + " = " + output.ToString());
+    }
+
+    //Generic version, theoretically can be used with anything that has a ToString() method.
+    public static void SimpleVariableOutput<T>(Component caller, T output, string nameOfOutput, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + nameOfOutput + " = " + output.ToString());
+    }
+
+    /*
     //Returns the calling method's name
     public static string GetCallingMethod([System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
     {
         return memberName;
     }
+    
 
     //Way to return variable name, need to look into using this properly
     public static string GetVariableName<T>(T item) where T : class
     {
         return typeof(T).GetProperties()[0].Name;
     }
+    */
 }

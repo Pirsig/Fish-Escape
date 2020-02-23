@@ -97,7 +97,7 @@ public class ScoreZone : MonoBehaviour
 
         scoreValue = baseScore * scoreMultiplier;
 
-        DebugMessages.SimpleMethodOutput(this, scoreValue, "scoreValue");
+        DebugMessages.SimpleVariableOutput(this, scoreValue, "scoreValue");
 
         return scoreValue;
     }
