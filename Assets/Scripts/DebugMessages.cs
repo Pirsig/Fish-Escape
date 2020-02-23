@@ -49,6 +49,12 @@ public static class DebugMessages
         Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + outputName + " = " + output);
     }
 
+    //Used to indicate the output of one float operation in a method
+    public static void SimpleMethodOutput(Component caller, int output, string outputName, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": " + outputName + " = " + output);
+    }
+
     //Returns the calling method's name
     public static string GetCallingMethod([System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
     {
