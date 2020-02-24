@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     //private float bottomBoundary = -4f;
     [SerializeField]
     private StringReference obstacleTag;
+    [SerializeField]
+    private StringReference extraScoreTag;
+    [SerializeField]
+    private FloatReference score;
     
     private Rigidbody2D rb;
 
@@ -62,7 +66,51 @@ public class PlayerController : MonoBehaviour
     protected virtual void OnPlayerDied()
     {
         DebugMessages.OriginatingEventFired(this, "OnPlayerDied()");
-        PlayerDied?.Invoke();
+
         playerDead = true;
+
+        StartCoroutine(AddExtraFishScore());
+
+        PlayerDied?.Invoke();
+    }
+
+    IEnumerator AddExtraFishScore()
+    {
+        DebugMessages.CoroutineStarted(this);
+        int index = 0;
+
+        GameObject[] scoreFish = GameObject.FindGameObjectsWithTag(extraScoreTag);
+
+        while (index < scoreFish.Length)
+        {
+            GameObject currentScoreFish = scoreFish[index];
+            CluelessFishAI currentScoreFishAI = currentScoreFish.GetComponent<CluelessFishAI>();
+            if(currentScoreFishAI.Collected)
+            {
+                StartCoroutine(AddFishToScore(currentScoreFish, currentScoreFishAI, new Vector3(10f, 10f, 0f), 1.5f));
+            }
+            index++;
+            yield return new WaitForSeconds(.5f);
+        }
+
+        DebugMessages.CoroutineEnded(this);
+    }
+    
+
+    IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
+    {
+        DebugMessages.CoroutineStarted(this);
+        Timer timer = new Timer(seconds);
+        Vector3 startingPosition = scoreFish.transform.position;
+        while (timer.CurrentTime < timer.MaxTime)
+        {
+            scoreFish.transform.position = Vector3.Lerp(startingPosition, targetPosition, (timer.CurrentTime / timer.MaxTime));
+            timer.UpdateTimer(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        scoreFish.transform.position = targetPosition;
+        score.Value += scoreFishAI.ScoreValue;
+        Destroy(scoreFish);
+        DebugMessages.CoroutineEnded(this);
     }
 }

@@ -7,6 +7,7 @@ public class CluelessFishAI : MonoBehaviour
     //The value of the fish when added to the player's score
     [SerializeField]
     private int scoreValue;
+    public int ScoreValue { get => scoreValue; }
     //The movement speed of the fish, should be slower than the player
     [SerializeField]
     private float speed;
@@ -23,6 +24,7 @@ public class CluelessFishAI : MonoBehaviour
 
     //Has the player collected the fish
     private bool collected = false;
+    public bool Collected { get => collected; }
 
     //The time to wait before setting a new y position
     [SerializeField]
