@@ -159,5 +159,8 @@ MonoBehaviour:
   xOffsetBehindPlayer: 2.5
   movementTransitionTime: 2
   yChangeTime: 2
-  playerTag: Player
-  player: {fileID: 0}
+  playerTag:
+    isLocal: 0
+    isStatic: 1
+    localValue: 
+    Variable: {fileID: 11400000, guid: ae6690028bbaa084da66623dc7bc4415, type: 2}

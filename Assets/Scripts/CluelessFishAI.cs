@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using BaseVariables;
 
 public class CluelessFishAI : MonoBehaviour
 {
@@ -31,13 +32,14 @@ public class CluelessFishAI : MonoBehaviour
     
     //the tag used to identify the player
     [SerializeField]
-    private string playerTag;
-    public GameObject player;
+    private StringReference playerTag;
+    private GameObject player;
 
     private void Awake()
     {
         yChangeTimer = new Timer(yChangeTime);
         randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
+        player = GameObject.FindGameObjectWithTag(playerTag);
     }
 
     private void Update()

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BaseVariables;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -13,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float bottomBoundary = -4f;
     [SerializeField]
-    private string obstacleTag;
+    private StringReference obstacleTag;
     
     private Rigidbody2D rb;
 
