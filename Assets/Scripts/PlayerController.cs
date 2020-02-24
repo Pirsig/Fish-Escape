@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
     //private float bottomBoundary = -4f;
     [SerializeField]
     private StringReference obstacleTag;
-    [SerializeField]
-    private StringReference extraScoreTag;
-    [SerializeField]
-    private FloatReference score;
+    //[SerializeField]
+    //private StringReference extraScoreTag;
+    //[SerializeField]
+    //private FloatReference score;
     
     private Rigidbody2D rb;
 
@@ -68,13 +68,11 @@ public class PlayerController : MonoBehaviour
         DebugMessages.OriginatingEventFired(this, "OnPlayerDied()");
 
         playerDead = true;
-
-        StartCoroutine(AddExtraFishScore());
-
+        
         PlayerDied?.Invoke();
     }
 
-    IEnumerator AddExtraFishScore()
+    /*IEnumerator AddExtraFishScore()
     {
         DebugMessages.CoroutineStarted(this);
         int index = 0;
@@ -112,5 +110,5 @@ public class PlayerController : MonoBehaviour
         score.Value += scoreFishAI.ScoreValue;
         Destroy(scoreFish);
         DebugMessages.CoroutineEnded(this);
-    }
+    }*/
 }
