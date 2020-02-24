@@ -38,12 +38,12 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce);
         }
 
-        if (transform.position.y > topBoundary || transform.position.y < bottomBoundary )
+        /*if (transform.position.y > topBoundary || transform.position.y < bottomBoundary )
         {
             Debug.Log("Player Died");
             OnPlayerDied();
             //SceneManager.LoadScene(0);
-        }
+        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
