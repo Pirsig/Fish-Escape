@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 500f;
     [SerializeField]
     private float topBoundary = 10f;  //The highest the player can go before dying
-    [SerializeField]
-    private float bottomBoundary = -4f;
+    //[SerializeField]
+    //private float bottomBoundary = -4f;
     [SerializeField]
     private StringReference obstacleTag;
     
@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce);
         }
 
+        if(transform.position.y > topBoundary)
+        {
+            Debug.Log("Player Died");
+            OnPlayerDied();
+        }
         /*if (transform.position.y > topBoundary || transform.position.y < bottomBoundary )
         {
             Debug.Log("Player Died");
