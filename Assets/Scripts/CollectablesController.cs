@@ -10,12 +10,19 @@ public class CollectablesController : MonoBehaviour
     [SerializeField]
     private FloatReference score;
     [SerializeField]
-    private GameObject[] Collectables;
+    private GameObject[] collectibles;
+    [SerializeField]
+    private Vector3 spawnLocation;
+
+    [SerializeField]
+    private float timeBetweenSpawns = 2f;
+    private Timer spawnTimer;
 
     private void Awake()
     {
         PlayerController.PlayerDied += OnPlayerDied;
         DebugMessages.ClassInObjectSubscribed(this, "PlayerDied");
+        spawnTimer = new Timer(timeBetweenSpawns);
     }
 
     private void OnDestroy()
@@ -28,6 +35,20 @@ public class CollectablesController : MonoBehaviour
     {
         PlayerController.PlayerDied -= OnPlayerDied;
         DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
+    }
+
+    private void Update()
+    {
+        //populate with collectable fish
+        if(!spawnTimer.TimerCompleted)
+        {
+            spawnTimer.UpdateTimer(Time.deltaTime);
+        }
+        else
+        {
+            SpawnCollectible();
+            spawnTimer.ResetTimer();
+        }
     }
 
     IEnumerator AddExtraFishScore()
@@ -57,7 +78,7 @@ public class CollectablesController : MonoBehaviour
         DebugMessages.CoroutineStarted(this);
         Timer timer = new Timer(seconds);
         Vector3 startingPosition = scoreFish.transform.position;
-        while (timer.CurrentTime < timer.MaxTime)
+        while (!timer.TimerCompleted)
         {
             scoreFish.transform.position = Vector3.Lerp(startingPosition, targetPosition, (timer.CurrentTime / timer.MaxTime));
             timer.UpdateTimer(Time.deltaTime);
@@ -65,8 +86,14 @@ public class CollectablesController : MonoBehaviour
         }
         scoreFish.transform.position = targetPosition;
         score.Value += scoreFishAI.ScoreValue;
-        Destroy(scoreFish);
         DebugMessages.CoroutineEnded(this);
+        //Destroy(scoreFish);
+    }
+
+    private void SpawnCollectible()
+    {
+        
+        Instantiate(collectibles[Random.Range(0, collectibles.Length)], spawnLocation, Quaternion.identity);
     }
 
     private void OnPlayerDied()
