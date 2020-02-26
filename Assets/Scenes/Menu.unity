@@ -1013,12 +1013,12 @@ PrefabInstance:
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1029,11 +1029,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1341618524}
+      objectReference: {fileID: 1341618525}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayButton
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1043,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1054,16 +1054,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1341618524}
+      objectReference: {fileID: 1341618525}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: QuitButton
+      value: ChangeMusic
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 774999667024642776, guid: f6fde56338541f44e92099207caeb392,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Main
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642782, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1987,6 +1997,7 @@ GameObject:
   - component: {fileID: 1341618522}
   - component: {fileID: 1341618521}
   - component: {fileID: 1341618524}
+  - component: {fileID: 1341618525}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -2086,6 +2097,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afce58d41bccb6245b19e2f33d2e0687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1341618525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341618519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3375583fc3c0e4b972534ce325d3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1391317871
@@ -2350,10 +2373,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2337ba5187279774ea295370e6ff2d26,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2466,6 +2489,7 @@ MonoBehaviour:
   defaultTimesToLoop: 1
   songs:
   - {fileID: 11400000, guid: 85798e8f21362aa40b82f0ff1f914829, type: 2}
+  - {fileID: 11400000, guid: b62e6aee782100c46acb5a00bea070a9, type: 2}
 --- !u!1 &1908703003
 GameObject:
   m_ObjectHideFlags: 0
