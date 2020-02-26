@@ -20,5 +20,10 @@ public class LoadSceneButton : MonoBehaviour
         bgmController.ChangeMusicTrack(trackNumber);
     }
 
-
+    public void QuitButton()
+    {
+        PlayerPrefs.Save();
+        Application.Quit();
+        Debug.Log("QuitGame button pressed");
+    }
 }
