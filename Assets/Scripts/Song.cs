@@ -7,11 +7,11 @@ using UnityEngine;
 public class Song : ScriptableObject
 {
 
-    public Music[] audioClips;
+    public Music[] musicClips;
 
     public Music[] LoadSong()
     {
-        return audioClips;
+        return musicClips;
     }
 
     /*public static implicit operator Music[](Song song)
@@ -24,9 +24,9 @@ public class Song : ScriptableObject
         string clipsInSong = "";
         int index = 0;
 
-        while(index < audioClips.Length)
+        while(index < musicClips.Length)
         {
-            clipsInSong += (audioClips[index].ToString() + ", ");
+            clipsInSong += (musicClips[index].ToString() + ", ");
             index++;
         }
         return clipsInSong;
