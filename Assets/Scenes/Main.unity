@@ -1308,7 +1308,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bccd7b50182e00947be44bb7468d7c09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a41abb14985657d49b0be0d573706a7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1369,7 +1369,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9, y: 0.57}
+    oldSize: {x: 0.9, y: 0.6}
     newSize: {x: 0.9, y: 0.57}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1377,20 +1377,25 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.45, y: 0.095}
-      - {x: 0.41, y: 0.114999995}
-      - {x: 0.02, y: 0.285}
-      - {x: -0.12, y: 0.285}
-      - {x: -0.22999999, y: 0.13499999}
-      - {x: -0.38, y: 0.24499999}
-      - {x: -0.45, y: 0.21499999}
-      - {x: -0.45, y: -0.235}
-      - {x: -0.07, y: -0.205}
-      - {x: -0.06, y: -0.285}
-      - {x: 0.049999997, y: -0.285}
-      - {x: 0.13, y: -0.195}
-      - {x: 0.42, y: -0.114999995}
-      - {x: 0.45, y: -0.035}
+    - - {x: 0.38039267, y: 0.10009819}
+      - {x: 0.21000004, y: 0.15078562}
+      - {x: 0.106797576, y: 0.2993127}
+      - {x: -0.089999996, y: 0.099999994}
+      - {x: -0.22999999, y: 0.14999999}
+      - {x: -0.43833065, y: 0.2123187}
+      - {x: -0.3206737, y: 0.01899489}
+      - {x: -0.44493175, y: -0.15241684}
+      - {x: -0.22349691, y: -0.0500982}
+      - {x: -0.089999996, y: -0.04}
+      - {x: -0.08280969, y: -0.1133006}
+      - {x: -0.0026130676, y: -0.18601206}
+      - {x: 0.070589185, y: -0.08817226}
+      - {x: 0.12699378, y: -0.2929078}
+      - {x: 0.24290788, y: -0.11137471}
+      - {x: 0.2862085, y: -0.21019639}
+      - {x: 0.3620999, y: -0.10518268}
+      - {x: 0.4400983, y: -0.0666994}
+      - {x: 0.45660126, y: 0.049999997}
 --- !u!1 &1398313560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 1
+  baseSpeed: 2
   speedIncrease: 0.1
   maxObstaclesPassed: 15
   despawnPosition: -15
@@ -1486,7 +1491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398313560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.54, y: -5.01, z: -0.2}
+  m_LocalPosition: {x: 11.248, y: -4.89, z: -0.2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1611,7 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5b3458019406644a62eb4dd0e52b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1.2
+  scrollSpeed: 0.145
 --- !u!1 &1497270213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,9 +1656,11 @@ MonoBehaviour:
     isStatic: 0
     localValue: 0
     Variable: {fileID: 11400000, guid: 1b11a956d6721a74bbd182e53f73c5a8, type: 2}
-  Collectables:
+  collectibles:
   - {fileID: 917556676905946956, guid: 1b26d8b10a8cfdd499d5c8c42574fa82, type: 3}
   - {fileID: 3867264134189263444, guid: 6b8859ee17fb2044097f4b64ca912001, type: 3}
+  spawnLocation: {x: 5, y: 0, z: 0}
+  timeBetweenSpawns: 5
 --- !u!4 &1497270215
 Transform:
   m_ObjectHideFlags: 0
@@ -1920,7 +1927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 1
+  baseSpeed: 2
   speedIncrease: 0.1
   maxObstaclesPassed: 15
   despawnPosition: -15
@@ -1985,7 +1992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684740121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.3, z: -0.2}
+  m_LocalPosition: {x: 1.443, y: -4.526, z: -0.2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2021,7 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 1
+  baseSpeed: 2
   speedIncrease: 0.1
   maxObstaclesPassed: 15
   despawnPosition: -15
@@ -2086,7 +2093,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697225768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.99, y: -4.6, z: -0.2}
+  m_LocalPosition: {x: -8.76, y: -4.839, z: -0.2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
