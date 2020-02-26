@@ -19,6 +19,7 @@ public class BGMController : MonoBehaviour
 
     private void Awake()
     {
+        //DontDestroyOnLoad(this);
         musicSource = GetComponent<AudioSource>();
         //loads the volume setting from playerprefs if it exists
         if ( PlayerPrefs.HasKey(mixerKey))
@@ -30,6 +31,7 @@ public class BGMController : MonoBehaviour
         SetMusic(music[0]);
         musicIndex = 0;
         musicSource.Play();
+        Debug.LogWarning("BGMController has finished initializing and should be playing music.");
     }
 
     private void Update()
