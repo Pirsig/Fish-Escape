@@ -34,4 +34,9 @@ public class Music
         useDefaultLoops = true;
         timesToLoop = 0;
     }
+
+    public override string ToString()
+    {
+        return name;
+    }
 }

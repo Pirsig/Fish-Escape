@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d0dc5063c3aeb4c88a8682dff75cd2, type: 3}
   m_Name: Menu1
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClips:
+  - name: MenuMusic1
+    musicClip: {fileID: 8300000, guid: 74580d5a4072615469ada171210c5cc5, type: 3}
+    loop: 1
+    volume: 1
+    pitch: 0
+    useDefaultLoops: 1
+    timesToLoop: 0
+  - name: MenuMusic2
+    musicClip: {fileID: 8300000, guid: b0f41adb47c970e47a20f0f48cab1ee1, type: 3}
+    loop: 1
+    volume: 1
+    pitch: 0
+    useDefaultLoops: 0
+    timesToLoop: 3

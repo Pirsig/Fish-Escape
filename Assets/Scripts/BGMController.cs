@@ -12,14 +12,15 @@ public class BGMController : MonoBehaviour
     public int defaultTimesToLoop = 1;
     private int timesLooped = 0;
 
-    public Music[] music;
+    public Song[] songs;
+    private Music[] currentTrack;
     private int musicIndex; //the current index from music[] that is being played
 
 
 
     private void Awake()
     {
-        //DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
         musicSource = GetComponent<AudioSource>();
         //loads the volume setting from playerprefs if it exists
         if ( PlayerPrefs.HasKey(mixerKey))
@@ -27,8 +28,13 @@ public class BGMController : MonoBehaviour
             mixer.SetFloat(mixerKey, PlayerPrefs.GetFloat(mixerKey));
         }
 
+        //initializes music[] to the first track in songs[]
+        currentTrack = songs[0].LoadSong();
+        DebugMessages.SimpleVariableOutput(this, currentTrack, nameof(currentTrack));
+        DebugMessages.SimpleVariableOutput(this, songs[0], "songs[0]");
+
         //initializes musicSource with the first item in music[0]
-        SetMusic(music[0]);
+        SetMusic(currentTrack[0]);
         musicIndex = 0;
         musicSource.Play();
         Debug.LogWarning("BGMController has finished initializing and should be playing music.");
@@ -45,7 +51,7 @@ public class BGMController : MonoBehaviour
 
             //if we've looped through the amount of times given by timesToLoop we set the next music track
             //If useDefaultLoops is true for this track we will use defaultTimesToLoop, otherwise we use the timesToLoop from this music track
-            if ( music[musicIndex].UseDefaultLoops? timesLooped > defaultTimesToLoop : timesLooped > music[musicIndex].timesToLoop)
+            if ( currentTrack[musicIndex].UseDefaultLoops? timesLooped > defaultTimesToLoop : timesLooped > currentTrack[musicIndex].timesToLoop)
             {
                 SetNextMusic();
             }
@@ -69,11 +75,11 @@ public class BGMController : MonoBehaviour
     //if we are not on the last index of music we go to index+1, otherwise we reset to index 0 and set the first track
     public void SetNextMusic()
     {
-        if (musicIndex + 1 < music.Length)
+        if (musicIndex + 1 < currentTrack.Length)
         {
             musicIndex++;
         }
-        else if (musicIndex + 1 == music.Length)
+        else if (musicIndex + 1 == currentTrack.Length)
         {
             musicIndex = 0;
         }
@@ -84,6 +90,6 @@ public class BGMController : MonoBehaviour
             return;
         }
 
-        SetMusic(music[musicIndex]);
+        SetMusic(currentTrack[musicIndex]);
     }
 }
