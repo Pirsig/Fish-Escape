@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerDiedEventHandler();
     public static event PlayerDiedEventHandler PlayerDied;
     private bool playerDead;
+    public bool PlayerDead { get => playerDead; }
 
     //public event EventHandler PlayerDied;
 
