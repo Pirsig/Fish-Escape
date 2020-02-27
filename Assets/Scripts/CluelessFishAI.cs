@@ -37,24 +37,33 @@ public class CluelessFishAI : MonoBehaviour
     private StringReference playerTag;
     private GameObject player;
 
+    private CollectablesController controller;
+
     private void Awake()
     {
         yChangeTimer = new Timer(yChangeTime);
         randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
         player = GameObject.FindGameObjectWithTag(playerTag);
+        controller = GameObject.Find("CollectablesController").GetComponent<CollectablesController>();
     }
 
     private void Update()
     {
         if(!collected)
         {
+            //move randomly up and down drifting back towards and eventually behind the player
             yChangeTimer.UpdateTimer(Time.deltaTime);
             if(yChangeTimer.TimerCompleted)
             {
                 randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
                 yChangeTimer.ResetTimer();
             }
-            transform.position += Time.deltaTime * speed * new Vector3(1, randomYPosition, 0); 
+            transform.position += Time.deltaTime * speed * new Vector3(1, randomYPosition, 0);
+            if (transform.position.x < -controller.SpawnLocation.x)
+            {
+                DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
+                Destroy(this.gameObject);
+            }
         }
     }
 
