@@ -13,10 +13,13 @@ public class CollectablesController : MonoBehaviour
     private GameObject[] collectibles;
     [SerializeField]
     private Vector3 spawnLocation;
+    public Vector3 SpawnLocation { get => spawnLocation;  }
 
     [SerializeField]
     private float timeBetweenSpawns = 2f;
     private Timer spawnTimer;
+
+    private bool playerDead = false;
 
     private void Awake()
     {
@@ -39,15 +42,18 @@ public class CollectablesController : MonoBehaviour
 
     private void Update()
     {
-        //populate with collectable fish
-        if(!spawnTimer.TimerCompleted)
+        if (!playerDead)
         {
-            spawnTimer.UpdateTimer(Time.deltaTime);
-        }
-        else
-        {
-            SpawnCollectible();
-            spawnTimer.ResetTimer();
+            //populate with collectable fish
+            if (!spawnTimer.TimerCompleted)
+            {
+                spawnTimer.UpdateTimer(Time.deltaTime);
+            }
+            else
+            {
+                SpawnCollectible();
+                spawnTimer.ResetTimer();
+            }
         }
     }
 
@@ -98,6 +104,7 @@ public class CollectablesController : MonoBehaviour
 
     private void OnPlayerDied()
     {
+        playerDead = true;
         StartCoroutine(AddExtraFishScore());
     }
 }
