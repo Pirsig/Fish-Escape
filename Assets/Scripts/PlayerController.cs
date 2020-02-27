@@ -58,9 +58,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == obstacleTag)
+        if (!playerDead)
         {
-            OnPlayerDied();
+            if (collision.gameObject.tag == obstacleTag)
+            {
+                OnPlayerDied();
+            }
         }
     }
 
