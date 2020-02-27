@@ -57,7 +57,7 @@ public class CollectablesController : MonoBehaviour
         }
     }
 
-    IEnumerator AddExtraFishScore()
+    private IEnumerator AddExtraFishScore()
     {
         DebugMessages.CoroutineStarted(this);
         int index = 0;
@@ -70,7 +70,7 @@ public class CollectablesController : MonoBehaviour
             CluelessFishAI currentScoreFishAI = currentScoreFish.GetComponent<CluelessFishAI>();
             if (currentScoreFishAI.Collected)
             {
-                StartCoroutine(AddFishToScore(currentScoreFish, currentScoreFishAI, new Vector3(10f, 10f, 0f), 1.5f));
+                currentScoreFishAI.AddCollectableToScore();
             }
             index++;
             yield return new WaitForSeconds(.5f);
@@ -79,7 +79,7 @@ public class CollectablesController : MonoBehaviour
         DebugMessages.CoroutineEnded(this);
     }
     
-    IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
+    /*IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
     {
         DebugMessages.CoroutineStarted(this);
         Timer timer = new Timer(seconds);
@@ -94,7 +94,7 @@ public class CollectablesController : MonoBehaviour
         score.Value += scoreFishAI.ScoreValue;
         DebugMessages.CoroutineEnded(this);
         //Destroy(scoreFish);
-    }
+    }*/
 
     private void SpawnCollectible()
     {

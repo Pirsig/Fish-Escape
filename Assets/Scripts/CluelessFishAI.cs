@@ -36,6 +36,8 @@ public class CluelessFishAI : MonoBehaviour
     [SerializeField]
     private StringReference playerTag;
     private GameObject player;
+    [SerializeField]
+    private FloatReference playerScore;
 
     private CollectablesController controller;
 
@@ -90,7 +92,7 @@ public class CluelessFishAI : MonoBehaviour
         objectToMove.transform.position = target;
     }*/
 
-    public IEnumerator StartFollowingPlayer()
+    private IEnumerator StartFollowingPlayer()
     {
         DebugMessages.CoroutineStarted(this);
         //int debugCounter = 0;
@@ -114,7 +116,7 @@ public class CluelessFishAI : MonoBehaviour
 
     //mimics loosely following the player by creating boundaries based on the player's current position as well as
     //xOffsetBehindPlayer, xBehindPlayerRange, and ySwimmingRange
-    public IEnumerator FollowPlayer()
+    private IEnumerator FollowPlayer()
     {
         DebugMessages.CoroutineStarted(this);
 
@@ -141,5 +143,28 @@ public class CluelessFishAI : MonoBehaviour
         //restarts the coroutine so we continue moving
         StartCoroutine("FollowPlayer");
         DebugMessages.CoroutineEnded(this);
+    }
+
+    public void AddCollectableToScore()
+    {
+        StartCoroutine(AddToScore(new Vector3(10f, 10f, 0f), 1.5f));
+    }
+
+    private IEnumerator AddToScore(Vector3 targetPosition, float seconds)
+    {
+        DebugMessages.CoroutineStarted(this);
+        Timer timer = new Timer(seconds);
+        Vector3 startingPosition = transform.position;
+        while (!timer.TimerCompleted)
+        {
+            transform.position = Vector3.Lerp(startingPosition, targetPosition, (timer.CurrentTime / timer.MaxTime));
+            timer.UpdateTimer(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = targetPosition;
+        playerScore.Value += ScoreValue;
+        DebugMessages.CoroutineEnded(this);
+        DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
+        Destroy(this);
     }
 }

@@ -164,3 +164,8 @@ MonoBehaviour:
     isStatic: 1
     localValue: 
     Variable: {fileID: 11400000, guid: ae6690028bbaa084da66623dc7bc4415, type: 2}
+  playerScore:
+    isLocal: 0
+    isStatic: 0
+    localValue: 0
+    Variable: {fileID: 11400000, guid: 1b11a956d6721a74bbd182e53f73c5a8, type: 2}
