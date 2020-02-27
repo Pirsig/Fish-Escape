@@ -1850,7 +1850,7 @@ MonoBehaviour:
   collectibles:
   - {fileID: 917556676905946956, guid: 1b26d8b10a8cfdd499d5c8c42574fa82, type: 3}
   - {fileID: 3867264134189263444, guid: 6b8859ee17fb2044097f4b64ca912001, type: 3}
-  spawnLocation: {x: 5, y: 0, z: 0}
+  spawnLocation: {x: 15, y: 0, z: 0}
   timeBetweenSpawns: 5
 --- !u!4 &1497270215
 Transform:
@@ -3013,6 +3013,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CluelessRedFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 917556676905946956, guid: 1b26d8b10a8cfdd499d5c8c42574fa82,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 917556676905946959, guid: 1b26d8b10a8cfdd499d5c8c42574fa82,
         type: 3}
