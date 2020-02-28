@@ -1850,8 +1850,8 @@ MonoBehaviour:
   collectibles:
   - {fileID: 917556676905946956, guid: 1b26d8b10a8cfdd499d5c8c42574fa82, type: 3}
   - {fileID: 3867264134189263444, guid: 6b8859ee17fb2044097f4b64ca912001, type: 3}
-  spawnLocation: {x: 15, y: 0, z: 0}
-  timeBetweenSpawns: 5
+  spawnLocation: {x: 5, y: 0, z: 0}
+  timeBetweenSpawns: 2
 --- !u!4 &1497270215
 Transform:
   m_ObjectHideFlags: 0
