@@ -31,7 +31,7 @@ public class CluelessFishAI : MonoBehaviour
     private float yChangeTime = 2f;
     private Timer yChangeTimer;
     private float randomYPosition;
-    
+
     //the tag used to identify the player
     [SerializeField]
     private StringReference playerTag;
@@ -40,6 +40,9 @@ public class CluelessFishAI : MonoBehaviour
     private FloatReference playerScore;
 
     private CollectablesController controller;
+
+    //bool for controlling whether or not the boundaries for follow the player are top right and bottom left or top left and bottom right
+    private bool flipMovementBoundaries = false;
 
     private void Awake()
     {
@@ -51,11 +54,11 @@ public class CluelessFishAI : MonoBehaviour
 
     private void Update()
     {
-        if(!collected)
+        if (!collected)
         {
             //move randomly up and down drifting back towards and eventually behind the player
             yChangeTimer.UpdateTimer(Time.deltaTime);
-            if(yChangeTimer.TimerCompleted)
+            if (yChangeTimer.TimerCompleted)
             {
                 randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
                 yChangeTimer.ResetTimer();
@@ -97,11 +100,11 @@ public class CluelessFishAI : MonoBehaviour
         DebugMessages.CoroutineStarted(this);
         //int debugCounter = 0;
         Vector3 transitionStartPosition = transform.position;
-        Vector3 transitionTargetPosition = new Vector3( (-xOffsetBehindPlayer - UnityEngine.Random.Range(0f, xBehindPlayerRange)), randomYPosition, 0);
+        Vector3 transitionTargetPosition = new Vector3((-xOffsetBehindPlayer - UnityEngine.Random.Range(0f, xBehindPlayerRange)), randomYPosition, 0);
         DebugMessages.SimpleVariableOutput(this, transitionStartPosition, nameof(transitionStartPosition));
         DebugMessages.SimpleVariableOutput(this, transitionTargetPosition, nameof(transitionTargetPosition));
         Timer moveTimer = new Timer(movementTransitionTime);
-        while(!moveTimer.TimerCompleted)
+        while (!moveTimer.TimerCompleted)
         {
             transform.position = Vector3.Lerp(transitionStartPosition, transitionTargetPosition, moveTimer.CurrentTime / moveTimer.MaxTime);
             moveTimer.UpdateTimer(Time.deltaTime);
@@ -122,13 +125,29 @@ public class CluelessFishAI : MonoBehaviour
 
         //Timer for how long we want to take for each movement
         Timer changeMovementTimer = new Timer(movementTransitionTime);
+
         Vector3 startPosition = transform.position;
+        //The lower boundary for choosing a new follow position
+        Vector3 lowerFollowBoundary;
+        //The upper boudnary for choosing a new follow position
+        Vector3 upperFollowBoundary;
 
         //random percent to lerp for choosing a new position
         float randomPos = Random.Range(0f, 1f);
         //Define our new boundaries based on the player's current location
-        Vector3 lowerFollowBoundary = new Vector3(-xOffsetBehindPlayer - xBehindPlayerRange, player.transform.position.y - ySwimmingRange, 0);
-        Vector3 upperFollowBoundary = new Vector3(-xOffsetBehindPlayer, player.transform.position.y + ySwimmingRange, 0);
+        if (!flipMovementBoundaries)
+        {
+            lowerFollowBoundary = new Vector3(-xOffsetBehindPlayer - xBehindPlayerRange, player.transform.position.y - ySwimmingRange, 0);
+            upperFollowBoundary = new Vector3(-xOffsetBehindPlayer, player.transform.position.y + ySwimmingRange, 0);
+            flipMovementBoundaries = true;
+        }
+        else
+        {
+            lowerFollowBoundary = new Vector3(-xOffsetBehindPlayer, player.transform.position.y - ySwimmingRange, 0);
+            upperFollowBoundary = new Vector3(-xOffsetBehindPlayer - xBehindPlayerRange, player.transform.position.y + ySwimmingRange, 0);
+            flipMovementBoundaries = false;
+        }
+
         //Choose a new position to go to within our boundaries
         Vector3 newPosition = Vector3.Lerp(lowerFollowBoundary, upperFollowBoundary, randomPos);
 
@@ -144,25 +163,37 @@ public class CluelessFishAI : MonoBehaviour
         StartCoroutine("FollowPlayer");
         DebugMessages.CoroutineEnded(this);
     }
+    
 
+    //Public method to start the  AddToScore coroutine with some default values
     public void AddCollectableToScore()
     {
         StartCoroutine(AddToScore(new Vector3(10f, 10f, 0f), 1.5f));
     }
 
-    private IEnumerator AddToScore(Vector3 targetPosition, float seconds)
+    //Public method to start the AddToScore coroutine with custom values
+    public void AddCollectableToScore(Vector3 targetPosition, float timeToMove)
+    {
+        StartCoroutine(AddToScore(targetPosition, timeToMove));
+    }
+
+    //moves the collectible to targetPosition over timeToMove and then adds its coreValue to playerScore
+    private IEnumerator AddToScore(Vector3 targetPosition, float timeToMove)
     {
         DebugMessages.CoroutineStarted(this);
-        Timer timer = new Timer(seconds);
+        Timer timer = new Timer(timeToMove);
         Vector3 startingPosition = transform.position;
+        //moves the object over timeToMove to the targetPosition
         while (!timer.TimerCompleted)
         {
             transform.position = Vector3.Lerp(startingPosition, targetPosition, (timer.CurrentTime / timer.MaxTime));
             timer.UpdateTimer(Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+        //moves us definitively to targetPosition, just in case
         transform.position = targetPosition;
-        playerScore.Value += ScoreValue;
+        //adds the objects scoreValue to the player's score
+        playerScore.Value += scoreValue;
         DebugMessages.CoroutineEnded(this);
         DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
         Destroy(this);
