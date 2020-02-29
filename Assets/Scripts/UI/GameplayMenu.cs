@@ -40,4 +40,16 @@ public class GameplayMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("QuitGame button pressed");
     }
+
+    //
+    public void SaveHighScore(HighScore newHighScore)
+    {
+        HighScore[] highScores = SaveManager.LoadHighScores();
+        highScores = HighScore.SortHighScores(newHighScore, highScores);
+        SaveManager.SaveHighScores(highScores);
+    }
+
+    
+
+    
 }

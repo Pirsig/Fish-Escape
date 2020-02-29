@@ -75,8 +75,42 @@ public class CollectablesController : MonoBehaviour
             index++;
             yield return new WaitForSeconds(.5f);
         }
-
+        CheckForNewHighScore(score);
         DebugMessages.CoroutineEnded(this);
+    }
+
+    private void CheckForNewHighScore(float score)
+    {
+        HighScore[] highScores;
+        try
+        {
+            highScores = SaveManager.LoadHighScores();
+        }
+        catch (System.IO.FileNotFoundException exception)
+        {
+            Debug.LogWarning("No save file was found for high scores");
+            Debug.LogWarning(exception);
+            //fills highScores with an empty array so it will make a new high score list
+            highScores = new HighScore[10];
+
+        }
+
+        if (HighScore.IsHighScoreNew(score, highScores))
+        {
+            Debug.Log("New High Score!");
+            //convert score into a new HighScore with the players name and write it to the disk
+            HighScore newHighScore = new HighScore(score);
+
+            //take in player's name
+
+            //write new highscore to the disk
+            highScores = HighScore.SortHighScores(newHighScore, highScores);
+            SaveManager.SaveHighScores(highScores);
+        }
+        else
+        {
+            Debug.Log("No new high score :(");
+        }
     }
     
     /*IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
