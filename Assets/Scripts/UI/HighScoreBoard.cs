@@ -8,6 +8,7 @@ public class HighScoreBoard : MonoBehaviour
     private HighScore[] highScores;
 
     public GameObject HighScoreDisplay;
+    private List<GameObject> DisplayedHighScores = new List<GameObject>();
     public Vector3 initialDisplayLocation;
     //The amount to add to the y value of initialDisplayLocation for each subsequent entry
     public float displayYOffset;
@@ -20,6 +21,16 @@ public class HighScoreBoard : MonoBehaviour
     {
         backgroundObject = gameObject.transform.Find("Background");
         DisplayHighScores();
+    }
+
+    private void OnEnable()
+    {
+        DisplayHighScores();
+    }
+
+    private void OnDisable()
+    {
+        ClearHighScoreDisplay();
     }
 
     private void DisplayHighScores()
@@ -47,6 +58,7 @@ public class HighScoreBoard : MonoBehaviour
             //create an individual highScore entry on the screen
             GameObject currentDisplay = Instantiate(HighScoreDisplay, backgroundObject);
             currentDisplay.GetComponent<RectTransform>().anchoredPosition = displayPosition;
+            DisplayedHighScores.Add(currentDisplay);
 
             //Changes all the text elements in currentDisplay to show the information from the current element of highScores
             setHighScoreDisplay(currentDisplay, highScores[index], index + 1);
@@ -57,9 +69,23 @@ public class HighScoreBoard : MonoBehaviour
         }
     }
 
+    private void ClearHighScoreDisplay()
+    {
+        if (DisplayedHighScores != null)
+        {
+            while (DisplayedHighScores.Count > 0)
+            {
+                GameObject toDestroy = DisplayedHighScores[0];
+                DisplayedHighScores.RemoveAt(0);
+                Destroy(toDestroy);
+            }
+        }
+    }
+
     public void ResetHighScores()
     {
         SaveManager.ResetHighScores();
+        ClearHighScoreDisplay();
     }
 
     public void setHighScoreDisplay(GameObject displayToSet, HighScore highScore, int position)
