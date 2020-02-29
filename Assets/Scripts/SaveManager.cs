@@ -51,26 +51,39 @@ public class SaveManager : MonoBehaviour
             loadedHighScores = new HighScore[10];
             return loadedHighScores;
         }
-        
-        try
-            {
-                //binary formatter for writing data to save file
-                BinaryFormatter formatter = new BinaryFormatter();
 
-                //Deserialization method
-                loadedHighScores = (HighScore[])formatter.Deserialize(file);
-            }
-            catch (SerializationException exception)
-            {
-                Debug.LogError("There was an error attempting to serialize high score data in loading. " + exception);
-                loadedHighScores = null;
-            }
-            finally
-            {
-                file.Close();
-            }
-        
+        try
+        {
+            //binary formatter for writing data to save file
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            //Deserialization method
+            loadedHighScores = (HighScore[])formatter.Deserialize(file);
+        }
+        catch (SerializationException exception)
+        {
+            Debug.LogError("There was an error attempting to serialize high score data in loading. " + exception);
+            loadedHighScores = null;
+        }
+        finally
+        {
+            file.Close();
+        }
+
         Debug.Log("Loading finished.");
         return loadedHighScores;
+    }
+
+    public static void ResetHighScores()
+    {
+        if (File.Exists(Application.persistentDataPath + "/highscores.dat"))
+        {
+            File.Delete(Application.persistentDataPath + "/highscores.dat");
+            Debug.LogWarning("High Score data has been deleted");
+        }
+        else
+        {
+            Debug.LogWarning("ResetHighScores did not find a highscores.dat to delete");
+        }
     }
 }

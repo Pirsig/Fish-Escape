@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &118622140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1962,7 +1962,7 @@ PrefabInstance:
     - target: {fileID: 774999667024642783, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: -155
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642783, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
@@ -1972,7 +1972,7 @@ PrefabInstance:
     - target: {fileID: 774999667024642783, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 774999667024642783, guid: f6fde56338541f44e92099207caeb392,
         type: 3}
