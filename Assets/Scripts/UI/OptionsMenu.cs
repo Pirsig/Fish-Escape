@@ -17,4 +17,9 @@ public class OptionsMenu : MonoBehaviour
     {
         PlayerPrefs.Save();
     }
+
+    public void ResetHighScores()
+    {
+        SaveManager.ResetHighScores();
+    }
 }
