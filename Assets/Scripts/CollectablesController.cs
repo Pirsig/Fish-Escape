@@ -21,6 +21,9 @@ public class CollectablesController : MonoBehaviour
 
     private bool playerDead = false;
 
+    [SerializeField]
+    private GameObject HighScoreEntryDisplay;
+
     private void Awake()
     {
         PlayerController.PlayerDied += OnPlayerDied;
@@ -99,13 +102,14 @@ public class CollectablesController : MonoBehaviour
         {
             Debug.Log("New High Score!");
             //convert score into a new HighScore with the players name and write it to the disk
-            HighScore newHighScore = new HighScore(score);
+            //HighScore newHighScore = new HighScore(score);
 
             //take in player's name
-
+            GameObject temp = Instantiate(HighScoreEntryDisplay, GameObject.Find("GameplayUI").transform);
+            temp.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 15);
             //write new highscore to the disk
-            highScores = HighScore.SortHighScores(newHighScore, highScores);
-            SaveManager.SaveHighScores(highScores);
+            //highScores = HighScore.SortHighScores(newHighScore, highScores);
+            //SaveManager.SaveHighScores(highScores);
         }
         else
         {

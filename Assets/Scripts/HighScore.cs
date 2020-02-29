@@ -79,4 +79,9 @@ public struct HighScore
         }
         return newScoreIsBigger;
     }
+
+    public override string ToString()
+    {
+        return name + ' ' + score.ToString();
+    }
 }

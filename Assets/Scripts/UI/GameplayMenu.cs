@@ -42,7 +42,7 @@ public class GameplayMenu : MonoBehaviour
     }
 
     //
-    public void SaveHighScore(HighScore newHighScore)
+    public static void SaveHighScore(HighScore newHighScore)
     {
         HighScore[] highScores = SaveManager.LoadHighScores();
         highScores = HighScore.SortHighScores(newHighScore, highScores);

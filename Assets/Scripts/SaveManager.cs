@@ -35,29 +35,41 @@ public class SaveManager : MonoBehaviour
     public static HighScore[] LoadHighScores()
     {
         Debug.Log("Loading...");
-
+        
         HighScore[] loadedHighScores;
+        FileStream file;
         //open the file to load from
-        FileStream file = new FileStream(Application.persistentDataPath + "/highscores.dat", FileMode.Open);
-
         try
         {
-            //binary formatter for writing data to save file
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            //Deserialization method
-            loadedHighScores = (HighScore[])formatter.Deserialize(file);
+            file = new FileStream(Application.persistentDataPath + "/highscores.dat", FileMode.Open);
         }
-        catch(SerializationException exception)
+        catch (System.IO.FileNotFoundException exception)
         {
-            Debug.LogError("There was an error attempting to serialize high score data in loading. " + exception);
-            loadedHighScores = null;
+            Debug.LogWarning("No save file was found for high scores");
+            Debug.LogWarning(exception);
+            //fills highScores with an empty array so it will make a new high score list
+            loadedHighScores = new HighScore[10];
+            return loadedHighScores;
         }
-        finally
-        {
-            file.Close();
-        }
+        
+        try
+            {
+                //binary formatter for writing data to save file
+                BinaryFormatter formatter = new BinaryFormatter();
 
+                //Deserialization method
+                loadedHighScores = (HighScore[])formatter.Deserialize(file);
+            }
+            catch (SerializationException exception)
+            {
+                Debug.LogError("There was an error attempting to serialize high score data in loading. " + exception);
+                loadedHighScores = null;
+            }
+            finally
+            {
+                file.Close();
+            }
+        
         Debug.Log("Loading finished.");
         return loadedHighScores;
     }
