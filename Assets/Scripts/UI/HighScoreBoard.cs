@@ -82,12 +82,6 @@ public class HighScoreBoard : MonoBehaviour
         }
     }
 
-    public void ResetHighScores()
-    {
-        SaveManager.ResetHighScores();
-        ClearHighScoreDisplay();
-    }
-
     public void setHighScoreDisplay(GameObject displayToSet, HighScore highScore, int position)
     {
         displayToSet.transform.Find("Position").GetComponent<TMP_Text>().SetText(position + ":");

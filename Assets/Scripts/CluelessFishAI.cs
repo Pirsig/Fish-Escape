@@ -63,7 +63,10 @@ public class CluelessFishAI : MonoBehaviour
                 randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
                 yChangeTimer.ResetTimer();
             }
+            //move
             transform.position += Time.deltaTime * speed * new Vector3(1, randomYPosition, 0);
+            
+            //destroy the object if it is past the point where obstacles despawn
             if (transform.position.x < -controller.SpawnLocation.x)
             {
                 DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
@@ -196,6 +199,6 @@ public class CluelessFishAI : MonoBehaviour
         playerScore.Value += scoreValue;
         DebugMessages.CoroutineEnded(this);
         DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
