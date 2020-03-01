@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BaseVariables;
+using System.Linq;
 
 public class CollectablesController : MonoBehaviour
 {
@@ -70,12 +72,20 @@ public class CollectablesController : MonoBehaviour
     {
         DebugMessages.CoroutineStarted(this);
         int index = 0;
-
-        GameObject[] scoreFish = GameObject.FindGameObjectsWithTag(extraScoreTag);
-
-        while (index < scoreFish.Length)
+        //populates a new list with all the collectibles currently active
+        List<GameObject> collectedObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag(extraScoreTag).ToList());
+        while(index < collectedObjects.Count)
         {
-            GameObject currentScoreFish = scoreFish[index];
+            Debug.LogWarning(collectedObjects[index].ToString());
+            index++;
+        }
+        Debug.LogWarning(collectedObjects.ToString());
+        //removes all objects from the list that were not collected
+        collectedObjects.RemoveAll(GameObject => !GameObject.GetComponent<CluelessFishAI>().Collected);
+        index = 0;
+        while (index < collectedObjects.Count)
+        {
+            GameObject currentScoreFish = collectedObjects[index];
             //if the object is null we move onto the next object in the array
             //this prevents problems cause by fish that despawned after the array's formation that were not collected, and thus still moving backwards
             if (currentScoreFish == null)
@@ -150,7 +160,7 @@ public class CollectablesController : MonoBehaviour
     private void SpawnCollectible()
     {
         
-        Instantiate(collectibles[Random.Range(0, collectibles.Length)], spawnLocation, Quaternion.identity);
+        Instantiate(collectibles[UnityEngine.Random.Range(0, collectibles.Length)], spawnLocation, Quaternion.identity);
     }
 
     private void OnPlayerDied()
