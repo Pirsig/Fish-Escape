@@ -21,7 +21,13 @@ public class CollectablesController : MonoBehaviour
 
     private bool playerDead = false;
 
+    [Header("End of round scoring")]
     [SerializeField]
+    private Vector3 scoreOffPosition;
+    [SerializeField]
+    private float timeToScore;
+
+    [Header("High Score entry screen")][SerializeField]
     private GameObject HighScoreEntryDisplay;
 
     private void Awake()
@@ -70,10 +76,17 @@ public class CollectablesController : MonoBehaviour
         while (index < scoreFish.Length)
         {
             GameObject currentScoreFish = scoreFish[index];
+            //if the object is null we move onto the next object in the array
+            //this prevents problems cause by fish that despawned after the array's formation that were not collected, and thus still moving backwards
+            if (currentScoreFish == null)
+            {
+                index++;
+                continue;
+            }
             CluelessFishAI currentScoreFishAI = currentScoreFish.GetComponent<CluelessFishAI>();
             if (currentScoreFishAI.Collected)
             {
-                currentScoreFishAI.AddCollectableToScore();
+                currentScoreFishAI.AddCollectableToScore(scoreOffPosition, timeToScore);
             }
             index++;
             yield return new WaitForSeconds(.5f);
