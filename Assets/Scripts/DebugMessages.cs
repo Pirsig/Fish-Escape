@@ -5,6 +5,24 @@ using System.Runtime;
 
 public static class DebugMessages
 {
+    //Generic version, theoretically can be used with anything that has a ToString() method.
+    public static void ArrayVariableOutput<T>(Component caller, T[] output, string nameOfOutput, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
+    {
+        string arrayValues = "";
+        int index = 0;
+        while (index < output.Length)
+        {
+            if(index == 0)
+            {
+                arrayValues = output[index].ToString();
+                index++;
+                continue;
+            }
+            arrayValues += ", " + output[index].ToString();
+            index++;
+        }
+        Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": Array " + nameOfOutput + " = " + "{ " + arrayValues + " }");
+    }
     public static void MethodInClassDestroyObject(Component caller, GameObject objectDestroyed, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
     {
         Debug.LogWarning(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + " will attempt to destroy " + objectDestroyed.name);
