@@ -32,7 +32,7 @@ public struct HighScore
         int index = 0;
         while (index < highScores.Length)
         {
-            if (scoreToCompare.score > highScores[index].score)
+            if (scoreToCompare.score >= highScores[index].score)
             {
                 HighScore temp = highScores[index];
                 highScores[index] = scoreToCompare;
