@@ -24,7 +24,7 @@ public class HighScoreEntry : MonoBehaviour, IPointerClickHandler
         Debug.LogWarning(playerNameInput.text);
         HighScore highScore = new HighScore(playerNameInput.text, score);
         HighScore[] highScores = SaveManager.LoadHighScores();
-        highScores = HighScore.SortHighScores(highScore, highScores);
+        highScores = HighScore.AddNewHighScore(highScore, highScores);
         SaveManager.SaveHighScores(highScores);
         DebugMessages.MethodInClassDestroyObject(this, entryDisplay);
         Destroy(entryDisplay);

@@ -26,7 +26,7 @@ public struct HighScore
         score = newScore;
     }
 
-    public static HighScore[] SortHighScores(HighScore newHighScore, HighScore[] highScores)
+    public static HighScore[] AddNewHighScore(HighScore newHighScore, HighScore[] highScores)
     {
         HighScore scoreToCompare = newHighScore;
         int index = 0;
