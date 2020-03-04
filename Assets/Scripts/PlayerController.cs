@@ -37,16 +37,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !playerDead)
+        if (!playerDead)
         {
-            rb.velocity = Vector2.zero;
-            rb.AddForce(Vector2.up * jumpForce);
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(Vector2.up * jumpForce);
+            }
 
-        if(transform.position.y > topBoundary)
-        {
-            Debug.Log("Player Died");
-            OnPlayerDied();
+            if (transform.position.y > topBoundary)
+            {
+                Debug.Log("Player Died");
+                OnPlayerDied();
+            }
         }
         /*if (transform.position.y > topBoundary || transform.position.y < bottomBoundary )
         {
