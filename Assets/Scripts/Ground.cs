@@ -1,10 +1,16 @@
 ﻿using System;
 using UnityEngine;
+using BaseVariables;
 
 public class Ground : MonoBehaviour
 {
     [SerializeField]
     private float scrollSpeed = 5f;
+    [SerializeField]
+    private float scrollSpeedIncrease = .05f;
+    private int obstaclesPassed;
+    [SerializeField]
+    private IntReference maxObstaclesPassed;
 
     private Renderer cachedRenderer;
 
@@ -17,18 +23,27 @@ public class Ground : MonoBehaviour
         playerDead = false;
         PlayerController.PlayerDied += OnPlayerDied;
         DebugMessages.ClassInObjectSubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored += OnPlayerScored;
+        DebugMessages.ClassInObjectSubscribed(this, "PlayerScored");
     }
 
     private void OnDestroy()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
         DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored -= OnPlayerScored;
+        DebugMessages.ClassInObjectUnsubscribed(this, "PlayerScored");
     }
 
     private void OnApplicationQuit()
     {
         PlayerController.PlayerDied -= OnPlayerDied;
         DebugMessages.ClassInObjectUnsubscribed(this, "PlayerDied");
+
+        ScoreZone.PlayerScored -= OnPlayerScored;
+        DebugMessages.ClassInObjectSubscribed(this, "PlayerScored");
     }
 
     void Update()
@@ -56,5 +71,16 @@ public class Ground : MonoBehaviour
     {
         DebugMessages.EventFired(this, "OnPlayerDied()");
         playerDead = true;
+    }
+
+    private void OnPlayerScored()
+    {
+        DebugMessages.EventFired(this, "OnPlayerScored()");
+        obstaclesPassed++;
+        if (obstaclesPassed >= maxObstaclesPassed)
+        {
+            scrollSpeed += scrollSpeedIncrease;
+            obstaclesPassed = 0;
+        }
     }
 }
