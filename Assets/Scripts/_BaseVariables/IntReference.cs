@@ -5,27 +5,48 @@ namespace BaseVariables
     [Serializable]
     public class IntReference
     {
-        public bool UseConstant = true;
-        public int ConstantValue;
-        public IntReference Variable;
+        public bool isLocal = true;
+        public bool isStatic = true;
+        public int localValue;
+        public IntVariable Variable;
 
         public IntReference()
         { }
 
-        public IntReference(int val)
+        public IntReference(int value)
         {
-            UseConstant = true;
-            ConstantValue = val;
+            isLocal = true;
+            isStatic = true;
+            localValue = value;
         }
 
-        public int value
+        public int Value
         {
-            get { return UseConstant ? ConstantValue : Variable.value; }
+            get { return isLocal ? localValue : Variable.value; }
+            set
+            {
+                if (isStatic != true)
+                {
+                    if (isLocal != true)
+                    {
+                        Variable.SetValue(value);
+                    }
+                    else
+                    {
+                        localValue = value;
+                    }
+                }
+            }
         }
 
         public static implicit operator int(IntReference reference)
         {
-            return reference.value;
+            return reference.Value;
+        }
+
+        public override string ToString()
+        {
+            return isLocal ? localValue.ToString() : Variable.value.ToString();
         }
     }
 }
