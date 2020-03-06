@@ -22,4 +22,10 @@ public class OptionsMenu : MonoBehaviour
     {
         SaveManager.ResetHighScores();
     }
+
+    public void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        Application.Quit();
+    }
 }
