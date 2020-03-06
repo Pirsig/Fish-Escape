@@ -8,7 +8,7 @@ public class BGMController : MonoBehaviour
     private AudioMixer mixer;
     public string mixerKey; //The key we want to use in playerprefs to store this mixer's volume.
     [SerializeField]
-    private float defaultVolume = -20f;
+    private float defaultVolume = 0.7f;
 
 
     private float timePlayed = 0f;
@@ -20,26 +20,6 @@ public class BGMController : MonoBehaviour
     private int musicIndex; //the current index from music[] that is being played
 
     private static GameObject instance;
-
-    private void Start()
-    {
-#if UNITY_EDITOR
-        //loads the volume setting from playerprefs if it exists
-        if (PlayerPrefs.HasKey(mixerKey))
-        {
-            mixer.SetFloat(mixerKey, PlayerPrefs.GetFloat(mixerKey));
-            Debug.LogWarning(mixerKey + " = " + PlayerPrefs.GetFloat(mixerKey).ToString() + " was loaded as the mixerKey");
-        }
-        //If no mixerKey was found in PlayerPrefs then we create one with the value from defaultVolume and save it to PlayerPrefs
-        else
-        {
-            Debug.Log("No mixerKey was loaded, a new one will be set");
-            mixer.SetFloat(mixerKey, defaultVolume);
-            PlayerPrefs.SetFloat(mixerKey, defaultVolume);
-            PlayerPrefs.Save();
-        }
-#endif
-    }
 
     private void Awake()
     {
@@ -92,6 +72,26 @@ public class BGMController : MonoBehaviour
         musicSource.Play();
         Debug.Log("Is music source playing?" + musicSource.isPlaying.ToString());
         Debug.LogWarning("BGMController has finished initializing and should be playing music.");*/
+    }
+
+    private void Start()
+    {
+#if UNITY_EDITOR
+        //loads the volume setting from playerprefs if it exists
+        if (PlayerPrefs.HasKey(mixerKey))
+        {
+            mixer.SetFloat(mixerKey, PlayerPrefs.GetFloat(mixerKey));
+            Debug.LogWarning(mixerKey + " = " + PlayerPrefs.GetFloat(mixerKey).ToString() + " was loaded as the mixerKey");
+        }
+        //If no mixerKey was found in PlayerPrefs then we create one with the value from defaultVolume and save it to PlayerPrefs
+        else
+        {
+            Debug.Log("No mixerKey was loaded, a new one will be set");
+            mixer.SetFloat(mixerKey, defaultVolume);
+            PlayerPrefs.SetFloat(mixerKey, defaultVolume);
+            PlayerPrefs.Save();
+        }
+#endif
     }
 
     private void Update()

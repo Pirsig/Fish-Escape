@@ -8,7 +8,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        mixer.SetFloat(mixerKey, volume);
+        mixer.SetFloat(mixerKey, Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat(mixerKey, volume);
         Debug.Log("volume = " + volume.ToString());
     }

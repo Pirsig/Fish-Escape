@@ -3137,6 +3137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234251469}
   - component: {fileID: 1234251470}
+  - component: {fileID: 1234251471}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -3209,10 +3210,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 968011879}
   m_HandleRect: {fileID: 1908703004}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3227,6 +3228,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1234251471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234251468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4f31fb406246f4796f0fea0f9081f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyToLoad: BGMVolume
 --- !u!1 &1240735363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,6 +4777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
   mixerKey: BGMVolume
+  defaultVolume: 0.7
   defaultTimesToLoop: 1
   songs:
   - {fileID: 11400000, guid: 85798e8f21362aa40b82f0ff1f914829, type: 2}
