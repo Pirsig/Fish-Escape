@@ -1846,6 +1846,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.145
+  scrollSpeedIncrease: 0.004
+  maxObstaclesPassed:
+    isLocal: 0
+    isStatic: 0
+    localValue: 0
+    Variable: {fileID: 11400000, guid: 11596d327c65bbc4f9bfc575b8565f40, type: 2}
 --- !u!1 &1497270213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,8 +1895,8 @@ MonoBehaviour:
   - {fileID: 917556676905946956, guid: 1b26d8b10a8cfdd499d5c8c42574fa82, type: 3}
   - {fileID: 3867264134189263444, guid: 6b8859ee17fb2044097f4b64ca912001, type: 3}
   spawnLocation: {x: 15, y: 0, z: 0}
-  timeBetweenSpawns: 2
-  scoreOffPosition: {x: 10, y: 10, z: 0}
+  timeBetweenSpawns: 5
+  scoreOffPosition: {x: -10, y: 10, z: 0}
   timeToScore: 0.1
   HighScoreEntryDisplay: {fileID: 7464640361896283662, guid: 633edc172e72f104a913f4abd3e8092a,
     type: 3}
