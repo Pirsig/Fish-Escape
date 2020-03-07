@@ -33,7 +33,7 @@ public class BGMController : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         musicSource = GetComponent<AudioSource>();
-        //loads the volume setting from playerprefs if it exists
+        /*//loads the volume setting from playerprefs if it exists
         if (PlayerPrefs.HasKey(mixerKey))
         {
             mixer.SetFloat(mixerKey, PlayerPrefs.GetFloat(mixerKey));
@@ -49,6 +49,7 @@ public class BGMController : MonoBehaviour
         }
 
         ChangeMusicTrack(0);
+        */
 
         //initializes music[] to the first track in songs[]
         /*currentTrack = songs[0].LoadSong();
@@ -76,22 +77,27 @@ public class BGMController : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
         //loads the volume setting from playerprefs if it exists
         if (PlayerPrefs.HasKey(mixerKey))
         {
-            mixer.SetFloat(mixerKey, PlayerPrefs.GetFloat(mixerKey));
+            mixer.SetFloat(mixerKey, Mathf.Log10(PlayerPrefs.GetFloat(mixerKey)) * 20);
             Debug.LogWarning(mixerKey + " = " + PlayerPrefs.GetFloat(mixerKey).ToString() + " was loaded as the mixerKey");
+            
+            mixer.GetFloat(mixerKey, out float actualValue);
+            Debug.Log(nameof(actualValue) + " = " + actualValue);
         }
         //If no mixerKey was found in PlayerPrefs then we create one with the value from defaultVolume and save it to PlayerPrefs
         else
         {
             Debug.Log("No mixerKey was loaded, a new one will be set");
-            mixer.SetFloat(mixerKey, defaultVolume);
+            mixer.SetFloat(mixerKey, Mathf.Log10(defaultVolume) * 20);
             PlayerPrefs.SetFloat(mixerKey, defaultVolume);
+            mixer.GetFloat(mixerKey, out float actualValue);
+            Debug.Log(nameof(actualValue) + " = " + actualValue);
             PlayerPrefs.Save();
         }
-#endif
+
+        ChangeMusicTrack(0);
     }
 
     private void Update()
