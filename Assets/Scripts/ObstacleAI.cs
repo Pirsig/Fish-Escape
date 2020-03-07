@@ -6,11 +6,11 @@ using BaseVariables;
 public class ObstacleAI : MonoBehaviour
 {
     [SerializeField]
-    private float baseSpeed = 1f;   //The base movement speed of the obstacle
+    private FloatReference baseSpeed = new FloatReference(2f);   //The base movement speed of the obstacle
     private float currentSpeed;  //the current speed for movement
     public float CurrentSpeed { get => currentSpeed; }
     [SerializeField]
-    private float speedIncrease = 0.1f;    //The amount to increase the speed multiplier by when it is increased
+    private FloatReference speedIncrease = new FloatReference(0.1f);    //The amount to increase the speed multiplier by when it is increased
 
     [SerializeField]
     private IntReference maxObstaclesPassed; //the amount of obstacles to pass before we increase the speed
@@ -74,7 +74,9 @@ public class ObstacleAI : MonoBehaviour
         if (!playerDead)
         {
             //Moves the obstacle to the left
-            transform.position += Time.deltaTime * currentSpeed * Vector3.left;
+            //*20 at the end is what synchronizes this with the ground scroll speed.
+            //the quad is 30 units long, tiling is set at 1.5, 30 * 1.5 gives us 20
+            transform.position += Time.deltaTime * currentSpeed * Vector3.left * 20;
 
             if (transform.position.x <= despawnPosition)
             {

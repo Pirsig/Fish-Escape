@@ -5,9 +5,10 @@ using BaseVariables;
 public class Ground : MonoBehaviour
 {
     [SerializeField]
-    private float scrollSpeed = 5f;
+    private FloatReference baseScrollSpeed;
+    private float currentScrollSpeed;
     [SerializeField]
-    private float scrollSpeedIncrease = .05f;
+    private FloatReference scrollSpeedIncrease;
     private int obstaclesPassed;
     [SerializeField]
     private IntReference maxObstaclesPassed;
@@ -19,6 +20,7 @@ public class Ground : MonoBehaviour
     private void Awake()
     {
         cachedRenderer = GetComponent<Renderer>();
+        currentScrollSpeed = baseScrollSpeed;
 
         playerDead = false;
         PlayerController.PlayerDied += OnPlayerDied;
@@ -58,7 +60,7 @@ public class Ground : MonoBehaviour
     {
         Vector2 currentTextureOffset = cachedRenderer.material.GetTextureOffset("_MainTex");
 
-        float distanceToScroll = Time.deltaTime * scrollSpeed;
+        float distanceToScroll = Time.deltaTime * currentScrollSpeed;
 
         float newXOffset = currentTextureOffset.x + distanceToScroll;
 
@@ -79,8 +81,10 @@ public class Ground : MonoBehaviour
         obstaclesPassed++;
         if (obstaclesPassed >= maxObstaclesPassed)
         {
-            scrollSpeed += scrollSpeedIncrease;
+            currentScrollSpeed += scrollSpeedIncrease;
             obstaclesPassed = 0;
         }
     }
+
+
 }

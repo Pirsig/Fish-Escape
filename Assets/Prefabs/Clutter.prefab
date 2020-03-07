@@ -94,8 +94,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84427530e20a69b4d8a53289aadf5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
-  speedIncrease: 0.1
+  baseSpeed:
+    isLocal: 0
+    isStatic: 1
+    localValue: 2
+    Variable: {fileID: 11400000, guid: c3b948bf82bf4c14f97760abbd8158d2, type: 2}
+  speedIncrease:
+    isLocal: 0
+    isStatic: 1
+    localValue: 0.1
+    Variable: {fileID: 11400000, guid: 53dfb56948f381942a6478b6ed4c2b38, type: 2}
   maxObstaclesPassed:
     isLocal: 0
     isStatic: 1
