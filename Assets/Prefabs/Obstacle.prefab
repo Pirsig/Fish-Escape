@@ -683,7 +683,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 2
   speedIncrease: 0.1
-  maxObstaclesPassed: 5
+  maxObstaclesPassed:
+    isLocal: 0
+    isStatic: 1
+    localValue: 0
+    Variable: {fileID: 11400000, guid: 11596d327c65bbc4f9bfc575b8565f40, type: 2}
   despawnPosition: -15
   respawnPosition: 15
   randomYOffset: 2

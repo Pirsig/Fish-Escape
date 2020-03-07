@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BaseVariables;
 
 public class ObstacleAI : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ObstacleAI : MonoBehaviour
     private float speedIncrease = 0.1f;    //The amount to increase the speed multiplier by when it is increased
 
     [SerializeField]
-    private int maxObstaclesPassed = 15; //the amount of obstacles to pass before we increase the speed
+    private IntReference maxObstaclesPassed; //the amount of obstacles to pass before we increase the speed
     private int obstaclesPassed;
 
     [SerializeField]
