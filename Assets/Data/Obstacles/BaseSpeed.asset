@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BaseSpeed
   m_EditorClassIdentifier: 
   developerDescription: The base movement speed for all obstacles
-  value: 3
+  value: 0.1

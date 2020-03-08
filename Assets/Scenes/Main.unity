@@ -561,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 1252249640495899790, guid: 2d939e5a865d702429481109f6b4c752,
         type: 3}
       propertyPath: m_Name
-      value: Obstacle3
+      value: Obstacle 3
       objectReference: {fileID: 0}
     - target: {fileID: 1252249640495899792, guid: 2d939e5a865d702429481109f6b4c752,
         type: 3}
@@ -601,7 +601,7 @@ PrefabInstance:
     - target: {fileID: 1252249640495899792, guid: 2d939e5a865d702429481109f6b4c752,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1252249640495899792, guid: 2d939e5a865d702429481109f6b4c752,
         type: 3}
@@ -1477,7 +1477,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
@@ -1599,7 +1599,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1255185196
 MonoBehaviour:
@@ -1675,8 +1675,8 @@ GameObject:
   - component: {fileID: 1408483224}
   - component: {fileID: 1408483223}
   - component: {fileID: 1408483222}
-  - component: {fileID: 1408483225}
   - component: {fileID: 1408483221}
+  - component: {fileID: 1408483225}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Obstacle
@@ -1766,7 +1766,7 @@ Transform:
   m_GameObject: {fileID: 1408483220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: -0.1}
-  m_LocalScale: {x: 25, y: 1, z: 1}
+  m_LocalScale: {x: 30, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1783,11 +1783,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5b3458019406644a62eb4dd0e52b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.145
-  scrollSpeedIncrease: 0.004
+  baseScrollSpeed:
+    isLocal: 0
+    isStatic: 1
+    localValue: 0
+    Variable: {fileID: 11400000, guid: c3b948bf82bf4c14f97760abbd8158d2, type: 2}
+  scrollSpeedIncrease:
+    isLocal: 0
+    isStatic: 1
+    localValue: 0
+    Variable: {fileID: 11400000, guid: 53dfb56948f381942a6478b6ed4c2b38, type: 2}
   maxObstaclesPassed:
     isLocal: 0
-    isStatic: 0
+    isStatic: 1
     localValue: 0
     Variable: {fileID: 11400000, guid: 11596d327c65bbc4f9bfc575b8565f40, type: 2}
 --- !u!1 &1497270213
@@ -3097,7 +3105,7 @@ PrefabInstance:
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7676628492096660766, guid: ebdf4c98efb01424e9ee9085c2494ab1,
         type: 3}
