@@ -151,7 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff97e24d9b749a4faccc03b263ad139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerVolumeKey: 
+  mixerVolumeKey:
+    isLocal: 1
+    isStatic: 1
+    localValue: SoundVolume
+    Variable: {fileID: 0}
   defaultVolume: 0.7
 --- !u!82 &84776465
 AudioSource:
@@ -162,7 +166,8 @@ AudioSource:
   m_GameObject: {fileID: 84776463}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4731313680280651307, guid: 2337ba5187279774ea295370e6ff2d26,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1448,12 +1453,12 @@ PrefabInstance:
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866232895558, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
@@ -1565,20 +1570,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: keyToLoad
+      value: SoundVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: 4731313680280651307, guid: 2337ba5187279774ea295370e6ff2d26,
+        type: 2}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: keyToLoad.localValue
+      value: SoundVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866595905174, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
@@ -2801,12 +2822,12 @@ PrefabInstance:
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866232895558, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
@@ -2918,20 +2939,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGMVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: keyToLoad.localValue
+      value: BGMVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: -7397135789593460657, guid: 2337ba5187279774ea295370e6ff2d26,
+        type: 2}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866595905174, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
@@ -2987,7 +3019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091732388
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3563,7 +3595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1341618520
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4585,7 +4617,7 @@ AudioSource:
   m_GameObject: {fileID: 1873004044}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 2337ba5187279774ea295370e6ff2d26,
+  OutputAudioMixerGroup: {fileID: -7397135789593460657, guid: 2337ba5187279774ea295370e6ff2d26,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -4699,8 +4731,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b04e2c4b0fb6d4dad064fc35c66c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
-  mixerKey: BGMVolume
+  mixerKey:
+    isLocal: 1
+    isStatic: 1
+    localValue: BGMVolume
+    Variable: {fileID: 0}
   defaultVolume: 0.7
   defaultTimesToLoop: 1
   songs:
@@ -5429,12 +5464,12 @@ PrefabInstance:
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755865287296718, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866232895558, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
@@ -5546,20 +5581,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: MasterVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: keyToLoad
+      value: MasterVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 2337ba5187279774ea295370e6ff2d26,
+        type: 2}
+    - target: {fileID: 8663755866232895577, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
+        type: 3}
+      propertyPath: keyToLoad.localValue
+      value: MasterVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866627610727, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
