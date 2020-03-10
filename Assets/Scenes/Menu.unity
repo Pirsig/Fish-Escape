@@ -2916,7 +2916,7 @@ PrefabInstance:
     - target: {fileID: 8663755866232895559, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
       propertyPath: m_Name
-      value: BGMVolumeSlider (2)
+      value: BGMVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 8663755866498845109, guid: 1d67ae9801cc95d44b27f546dd2de1f0,
         type: 3}
