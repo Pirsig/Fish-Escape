@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f305a1d65cb2f16409852564bd525ad2, type: 3}
   m_Name: ObstaclesBeforeSpeedIncrease
   m_EditorClassIdentifier: 
-  developerDescription: The number of obstacles the plaeyr will pass before the speed
+  developerDescription: The number of obstacles the player will pass before the speed
     increases.
-  value: 5
+  value: 8
