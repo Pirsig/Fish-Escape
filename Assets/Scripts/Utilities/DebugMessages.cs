@@ -23,6 +23,7 @@ public static class DebugMessages
         }
         Debug.Log(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + ": Array " + nameOfOutput + " = " + "{ " + arrayValues + " }");
     }
+
     public static void MethodInClassDestroyObject(Component caller, GameObject objectDestroyed, [System.Runtime.CompilerServices.CallerMemberName] string methodName = "")
     {
         Debug.LogWarning(methodName + " from " + caller.GetType().Name + " in " + caller.gameObject.name + " will attempt to destroy " + objectDestroyed.name);

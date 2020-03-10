@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 500f;
     [SerializeField]
+    private AudioClip[] jumpSounds;
+    private int currentJumpSound = 0;  //The index for the current sound in the jumpSounds array that we want to play, always starts at 0
+    [SerializeField]
     private float topBoundary = 10f;  //The highest the player can go before dying
     //[SerializeField]
     //private float bottomBoundary = -4f;
@@ -19,7 +22,8 @@ public class PlayerController : MonoBehaviour
     //private StringReference extraScoreTag;
     //[SerializeField]
     //private FloatReference score;
-    
+    private SoundController soundController;
+
     private Rigidbody2D rb;
 
     public delegate void PlayerDiedEventHandler();
@@ -35,12 +39,18 @@ public class PlayerController : MonoBehaviour
         playerDead = false;
     }
 
+    private void Start()
+    {
+        soundController = SoundController.FindSoundController();
+    }
+
     private void Update()
     {
         if (!playerDead)
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                PlayJumpSound();
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * jumpForce);
             }
@@ -57,6 +67,19 @@ public class PlayerController : MonoBehaviour
             OnPlayerDied();
             //SceneManager.LoadScene(0);
         }*/
+    }
+
+    private void PlayJumpSound()
+    {
+        if (soundController != null)
+        {
+            soundController.PlaySound(jumpSounds[currentJumpSound]);
+            currentJumpSound++;
+            if (currentJumpSound >= jumpSounds.Length)
+            {
+                currentJumpSound = 0;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
