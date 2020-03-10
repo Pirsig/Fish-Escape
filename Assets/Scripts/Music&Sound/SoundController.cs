@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using BaseVariables;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundController : MonoBehaviour
@@ -12,7 +13,7 @@ public class SoundController : MonoBehaviour
     private AudioSource audioSource;
     private AudioMixer mixer;
     [SerializeField]
-    private string mixerVolumeKey; //The key we want to use in playerprefs to store this mixer's volume.
+    private StringReference mixerVolumeKey; //The key we want to use in playerprefs to store this mixer's volume.
     [SerializeField]
     private float defaultVolume = 0.7f;
 
