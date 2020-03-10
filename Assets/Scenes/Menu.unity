@@ -3117,8 +3117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d415ec48a6ac248beecfa7f5ea9f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 2337ba5187279774ea295370e6ff2d26, type: 2}
-  mixerKey: BGMVolume
 --- !u!114 &1091732393
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ using System.Linq;
 public class CollectablesController : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mouseDisabler;
+    [SerializeField]
     private StringReference extraScoreTag;
     [SerializeField]
     private FloatReference score;
@@ -71,6 +73,7 @@ public class CollectablesController : MonoBehaviour
     private IEnumerator AddExtraFishScore()
     {
         DebugMessages.CoroutineStarted(this);
+        mouseDisabler.SetActive(true);
         int index = 0;
         //populates a new list with all the collectibles currently active
         List<GameObject> collectedObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag(extraScoreTag).ToList());
@@ -138,6 +141,7 @@ public class CollectablesController : MonoBehaviour
         {
             Debug.Log("No new high score :(");
         }
+        mouseDisabler.SetActive(false);
     }
     
     /*IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
