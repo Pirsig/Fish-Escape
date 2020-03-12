@@ -16,49 +16,49 @@ MonoBehaviour:
   - name: Game 1
     musicClip: {fileID: 8300000, guid: 470e0ea012142fa429e1ff5a58a3a216, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 1
   - name: Game 2
     musicClip: {fileID: 8300000, guid: ce8d1d1e133ba6c479d279620fe5083b, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 2
   - name: Game 3
     musicClip: {fileID: 8300000, guid: bb0b54eaa4df1ee40a44235a2a880b13, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 1
   - name: Game 4
     musicClip: {fileID: 8300000, guid: cc8aa7bbd47036042971f9cd1b84033b, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 1
   - name: Game 5
     musicClip: {fileID: 8300000, guid: ce8d1d1e133ba6c479d279620fe5083b, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 1
   - name: Game 6
     musicClip: {fileID: 8300000, guid: 1ec9264195d248f4981f6610ab78054b, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 2
   - name: Game 7
     musicClip: {fileID: 8300000, guid: cc8aa7bbd47036042971f9cd1b84033b, type: 3}
     loop: 1
-    volume: 1
+    volume: 0.5
     pitch: 1
     useDefaultLoops: 0
     timesToLoop: 1

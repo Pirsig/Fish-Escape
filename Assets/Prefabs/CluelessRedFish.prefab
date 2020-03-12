@@ -152,18 +152,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d06ea9339d2a748a5d9f427b210856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 100
   speed: -0.5
   ySwimmingRange: 2
   xBehindPlayerRange: 2
   xOffsetBehindPlayer: 2.5
   movementTransitionTime: 2
   yChangeTime: 2
+  collectedSound: {fileID: 8300000, guid: 4939d24907b7e5e458e6766ab39d4e02, type: 3}
   playerTag:
     isLocal: 0
     isStatic: 1
     localValue: 
     Variable: {fileID: 11400000, guid: ae6690028bbaa084da66623dc7bc4415, type: 2}
+  scoreValue: 100
   playerScore:
     isLocal: 0
     isStatic: 0

@@ -1984,8 +1984,8 @@ MonoBehaviour:
   - {fileID: 3867264134189263444, guid: 6b8859ee17fb2044097f4b64ca912001, type: 3}
   spawnLocation: {x: 15, y: 0, z: 0}
   timeBetweenSpawns: 5
-  scoreOffPosition: {x: -10, y: 10, z: 0}
-  timeToScore: 0.1
+  scoreOffPosition: {x: 0, y: 0, z: 0}
+  timeToScore: 0.05
   HighScoreEntryDisplay: {fileID: 7464640361896283662, guid: 633edc172e72f104a913f4abd3e8092a,
     type: 3}
 --- !u!4 &1497270215

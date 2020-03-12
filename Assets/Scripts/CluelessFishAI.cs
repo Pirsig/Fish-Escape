@@ -4,10 +4,7 @@ using BaseVariables;
 
 public class CluelessFishAI : MonoBehaviour
 {
-    //The value of the fish when added to the player's score
-    [SerializeField]
-    private int scoreValue;
-    public int ScoreValue { get => scoreValue; }
+    [Header("Movement & Spawning")]
     //The movement speed of the fish, should be slower than the player
     [SerializeField]
     private float speed;
@@ -22,23 +19,32 @@ public class CluelessFishAI : MonoBehaviour
     [SerializeField]
     private float movementTransitionTime = 2f;
 
-    //Has the player collected the fish
-    private bool collected = false;
-    public bool Collected { get => collected; }
-
     //The time to wait before setting a new y position
     [SerializeField]
     private float yChangeTime = 2f;
     private Timer yChangeTimer;
     private float randomYPosition;
 
+    [Header("Sound")]
+    [SerializeField]
+    private AudioClip collectedSound;
+    private SoundController soundController;
+
+    [Header("Player Info")]
     //the tag used to identify the player
     [SerializeField]
     private StringReference playerTag;
     private GameObject player;
+    //Has the player collected the fish
+    private bool collected = false;
+    public bool Collected { get => collected; }
+    //The value of the fish when added to the player's score
+    [SerializeField]
+    private int scoreValue;
+    public int ScoreValue { get => scoreValue; }
     [SerializeField]
     private FloatReference playerScore;
-
+    
     private CollectablesController controller;
 
     //bool for controlling whether or not the boundaries for follow the player are top right and bottom left or top left and bottom right
@@ -50,6 +56,11 @@ public class CluelessFishAI : MonoBehaviour
         randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
         player = GameObject.FindGameObjectWithTag(playerTag);
         controller = GameObject.Find("CollectablesController").GetComponent<CollectablesController>();
+    }
+
+    private void Start()
+    {
+        soundController = SoundController.FindSoundController();
     }
 
     private void Update()
@@ -77,9 +88,13 @@ public class CluelessFishAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == playerTag && !collected)
+        if (collision.gameObject.tag == playerTag && !collected && !player.GetComponent<PlayerController>().PlayerDead)
         {
             Debug.LogWarning(gameObject.name + " has collided with player!");
+            if (soundController != null)
+            {
+                soundController.PlaySound(collectedSound);
+            }
             collected = true;
             StartCoroutine("StartFollowingPlayer");
         }
