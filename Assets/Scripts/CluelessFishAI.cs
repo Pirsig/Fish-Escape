@@ -25,10 +25,13 @@ public class CluelessFishAI : MonoBehaviour
     private Timer yChangeTimer;
     private float randomYPosition;
 
+
+    private SoundController soundController;
     [Header("Sound")]
     [SerializeField]
     private AudioClip collectedSound;
-    private SoundController soundController;
+    [SerializeField]
+    private AudioClip scoreoffSound;
 
     [Header("Player Info")]
     //the tag used to identify the player
@@ -212,6 +215,7 @@ public class CluelessFishAI : MonoBehaviour
         transform.position = targetPosition;
         //adds the objects scoreValue to the player's score
         playerScore.Value += scoreValue;
+        soundController.PlaySound(scoreoffSound);
         DebugMessages.CoroutineEnded(this);
         DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
         Destroy(this.gameObject);
