@@ -11,6 +11,12 @@ public class CluelessFishAI : MonoBehaviour
     //The range the fish can move up and down while swimming around
     [SerializeField]
     private float ySwimmingRange;
+    //the lower and upper boundaries of where fish are allowed to move
+    [SerializeField]
+    private Vector2 yBoundaries;
+    private float currentYPosition;
+    //which boundary was violated; false for lower, true for upper
+    private bool lowerOrUpperBoundary;
     //The range at which the fish will hang behind the player once collected
     [SerializeField]
     private float xBehindPlayerRange;
@@ -68,10 +74,25 @@ public class CluelessFishAI : MonoBehaviour
 
     private void Update()
     {
+        currentYPosition = transform.position.y;
+        //move randomly up and down drifting back towards and eventually behind the player
         if (!collected)
         {
-            //move randomly up and down drifting back towards and eventually behind the player
             yChangeTimer.UpdateTimer(Time.deltaTime);
+            if (IsFishAtYBoundary(out lowerOrUpperBoundary))
+            {
+                if(!lowerOrUpperBoundary)
+                {
+                    //lower boundary violated
+                    randomYPosition = -ySwimmingRange;
+                }
+                else
+                {
+                    //upper boundary violated
+                    randomYPosition = ySwimmingRange;
+                }
+                yChangeTimer.ResetTimer();
+            }
             if (yChangeTimer.TimerCompleted)
             {
                 randomYPosition = UnityEngine.Random.Range(-ySwimmingRange, ySwimmingRange);
@@ -219,5 +240,27 @@ public class CluelessFishAI : MonoBehaviour
         DebugMessages.CoroutineEnded(this);
         DebugMessages.MethodInClassDestroyObject(this, this.gameObject);
         Destroy(this.gameObject);
+    }
+
+    //checks if the fish is at the lower or upper y boundary
+    //also outputs a bool for where it is the lower or upper boundary being violated
+    //false for lower, true for upper
+    private bool IsFishAtYBoundary(out bool upOrDown)
+    {
+        if (currentYPosition <= yBoundaries.x)
+        {
+            upOrDown = false;
+            return true;
+        }
+        else if (currentYPosition >= yBoundaries.y)
+        {
+            upOrDown = true;
+            return true;
+        }
+        else
+        {
+            upOrDown = false;
+            return false;
+        }
     }
 }

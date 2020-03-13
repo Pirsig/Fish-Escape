@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -0.5
   ySwimmingRange: 2
+  yBoundaries: {x: -4, y: 4}
   xBehindPlayerRange: 2
   xOffsetBehindPlayer: 2.5
   movementTransitionTime: 2
