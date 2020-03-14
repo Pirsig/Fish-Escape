@@ -3,35 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BaseVariables;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header ("Movement")]
     [SerializeField]
     private float jumpForce = 500f;
+    [SerializeField]
+    private float topBoundary = 10f;  //The highest the player can go before dying
+
+    [Header("Sound")]
     [SerializeField]
     private AudioClip[] jumpSounds;
     private int currentJumpSound = 0;  //The index for the current sound in the jumpSounds array that we want to play, always starts at 0
     [SerializeField]
-    private float topBoundary = 10f;  //The highest the player can go before dying
-    //[SerializeField]
-    //private float bottomBoundary = -4f;
-    [SerializeField]
-    private StringReference obstacleTag;
-    //[SerializeField]
-    //private StringReference extraScoreTag;
-    //[SerializeField]
-    //private FloatReference score;
+    private AudioClip deathSound;
     private SoundController soundController;
 
+    [Header ("Obstacles")]
+    [SerializeField]
+    private StringReference obstacleTag;
     private Rigidbody2D rb;
 
+    //Events
     public delegate void PlayerDiedEventHandler();
     public static event PlayerDiedEventHandler PlayerDied;
     private bool playerDead;
     public bool PlayerDead { get => playerDead; }
-
-    //public event EventHandler PlayerDied;
 
     private void Awake()
     {
@@ -61,17 +59,11 @@ public class PlayerController : MonoBehaviour
                 OnPlayerDied();
             }
         }
-        /*if (transform.position.y > topBoundary || transform.position.y < bottomBoundary )
-        {
-            Debug.Log("Player Died");
-            OnPlayerDied();
-            //SceneManager.LoadScene(0);
-        }*/
     }
 
     private void PlayJumpSound()
     {
-        if (soundController != null)
+        if (soundController != null && jumpSounds != null)
         {
             soundController.PlaySound(jumpSounds[currentJumpSound]);
             currentJumpSound++;
@@ -98,47 +90,11 @@ public class PlayerController : MonoBehaviour
         DebugMessages.OriginatingEventFired(this, "OnPlayerDied()");
 
         playerDead = true;
+        if(soundController != null && deathSound != null)
+        {
+            soundController.PlaySound(deathSound);
+        }
         
         PlayerDied?.Invoke();
     }
-
-    /*IEnumerator AddExtraFishScore()
-    {
-        DebugMessages.CoroutineStarted(this);
-        int index = 0;
-
-        GameObject[] scoreFish = GameObject.FindGameObjectsWithTag(extraScoreTag);
-
-        while (index < scoreFish.Length)
-        {
-            GameObject currentScoreFish = scoreFish[index];
-            CluelessFishAI currentScoreFishAI = currentScoreFish.GetComponent<CluelessFishAI>();
-            if(currentScoreFishAI.Collected)
-            {
-                StartCoroutine(AddFishToScore(currentScoreFish, currentScoreFishAI, new Vector3(10f, 10f, 0f), 1.5f));
-            }
-            index++;
-            yield return new WaitForSeconds(.5f);
-        }
-
-        DebugMessages.CoroutineEnded(this);
-    }
-    
-
-    IEnumerator AddFishToScore(GameObject scoreFish, CluelessFishAI scoreFishAI, Vector3 targetPosition, float seconds)
-    {
-        DebugMessages.CoroutineStarted(this);
-        Timer timer = new Timer(seconds);
-        Vector3 startingPosition = scoreFish.transform.position;
-        while (timer.CurrentTime < timer.MaxTime)
-        {
-            scoreFish.transform.position = Vector3.Lerp(startingPosition, targetPosition, (timer.CurrentTime / timer.MaxTime));
-            timer.UpdateTimer(Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        scoreFish.transform.position = targetPosition;
-        score.Value += scoreFishAI.ScoreValue;
-        Destroy(scoreFish);
-        DebugMessages.CoroutineEnded(this);
-    }*/
 }

@@ -1751,11 +1751,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 300
+  topBoundary: 7
   jumpSounds:
   - {fileID: 8300000, guid: 5f7b252815491a746a9b12a5bbc94a4b, type: 3}
   - {fileID: 8300000, guid: 6646ebfa34bc556439a4d55fd06ad30d, type: 3}
   - {fileID: 8300000, guid: 45a4a780141898340a31466c133aec79, type: 3}
-  topBoundary: 7
+  deathSound: {fileID: 8300000, guid: ab3735786aef40e46829406b6b6d2937, type: 3}
   obstacleTag:
     isLocal: 0
     isStatic: 1
