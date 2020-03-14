@@ -146,6 +146,11 @@ public class BGMController : MonoBehaviour
         Debug.LogWarning("ChangeMusicTrack() has completed, music should be playing!");
     }
 
+    public void ChangeVolume(float newVolume)
+    {
+        musicSource.volume = newVolume;
+    }
+
     private void DebugTrackChange(int songLoaded)
     {
         int index = 0;
