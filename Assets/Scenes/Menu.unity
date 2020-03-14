@@ -4739,6 +4739,7 @@ MonoBehaviour:
   songs:
   - {fileID: 11400000, guid: 85798e8f21362aa40b82f0ff1f914829, type: 2}
   - {fileID: 11400000, guid: b62e6aee782100c46acb5a00bea070a9, type: 2}
+  - {fileID: 11400000, guid: 7d07d93d7c657144ca80421040052434, type: 2}
 --- !u!1 &1899445891
 GameObject:
   m_ObjectHideFlags: 0

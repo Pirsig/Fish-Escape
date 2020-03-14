@@ -8,7 +8,9 @@ public class BGMController : MonoBehaviour
     private AudioSource musicSource;
     private AudioMixer mixer;
     [SerializeField]
-    private StringReference mixerKey; //The key we want to use in playerprefs to store this mixer's volume.
+    [Tooltip("The key we want to use in playerprefs to store this controller's mixer volume.")]
+    private StringReference mixerKey; //The key we want to use in playerprefs to store this controller's mixer volume.
+    [Tooltip("The default volume if there is no existing mixerKey in PlayerPrefs")]
     [SerializeField]
     private float defaultVolume = 0.7f;
 
@@ -17,6 +19,7 @@ public class BGMController : MonoBehaviour
     public int defaultTimesToLoop = 1;
     private int timesLooped = 0;
 
+    [Tooltip("Song 0 will always be the initial music played by the controller when it starts.")]
     public Song[] songs;
     private Music[] currentTrack;
     private int musicIndex; //the current index from music[] that is being played
@@ -48,29 +51,6 @@ public class BGMController : MonoBehaviour
         ChangeMusicTrack(0);
     }
 
-    private void InitializeVolume(string mixerKey)
-    {
-        //loads the volume setting from playerprefs if it exists
-        if (PlayerPrefs.HasKey(mixerKey))
-        {
-            mixer.SetFloat(mixerKey, Mathf.Log10(PlayerPrefs.GetFloat(mixerKey)) * 20);
-            Debug.LogWarning(mixerKey + " = " + PlayerPrefs.GetFloat(mixerKey).ToString() + " was loaded as the mixerKey");
-
-            mixer.GetFloat(mixerKey, out float actualValue);
-            Debug.Log(nameof(actualValue) + " = " + actualValue);
-        }
-        //If no mixerKey was found in PlayerPrefs then we create one with the value from defaultVolume and save it to PlayerPrefs
-        else
-        {
-            Debug.Log("No mixerKey was loaded, a new one will be set");
-            mixer.SetFloat(mixerKey, Mathf.Log10(defaultVolume) * 20);
-            PlayerPrefs.SetFloat(mixerKey, defaultVolume);
-            mixer.GetFloat(mixerKey, out float actualValue);
-            Debug.Log(nameof(actualValue) + " = " + actualValue);
-            PlayerPrefs.Save();
-        }
-    }
-
     private void Update()
     {
         Debug.Log("Update in BGMController has started");
@@ -98,6 +78,29 @@ public class BGMController : MonoBehaviour
         Debug.Log("Is musicSource playing? " + musicSource.isPlaying.ToString());
         DebugMessages.SimpleVariableOutput(this, timePlayed, nameof(timePlayed));
         DebugMessages.SimpleVariableOutput(this, musicSource.time, nameof(musicSource.time));
+    }
+
+    private void InitializeVolume(string mixerKey)
+    {
+        //loads the volume setting from playerprefs if it exists
+        if (PlayerPrefs.HasKey(mixerKey))
+        {
+            mixer.SetFloat(mixerKey, Mathf.Log10(PlayerPrefs.GetFloat(mixerKey)) * 20);
+            Debug.LogWarning(mixerKey + " = " + PlayerPrefs.GetFloat(mixerKey).ToString() + " was loaded as the mixerKey");
+
+            mixer.GetFloat(mixerKey, out float actualValue);
+            Debug.Log(nameof(actualValue) + " = " + actualValue);
+        }
+        //If no mixerKey was found in PlayerPrefs then we create one with the value from defaultVolume and save it to PlayerPrefs
+        else
+        {
+            Debug.Log("No mixerKey was loaded, a new one will be set");
+            mixer.SetFloat(mixerKey, Mathf.Log10(defaultVolume) * 20);
+            PlayerPrefs.SetFloat(mixerKey, defaultVolume);
+            mixer.GetFloat(mixerKey, out float actualValue);
+            Debug.Log(nameof(actualValue) + " = " + actualValue);
+            PlayerPrefs.Save();
+        }
     }
 
     //sets relevant values from music to the AudioSource musicSource
@@ -133,6 +136,18 @@ public class BGMController : MonoBehaviour
         SetMusic(currentTrack[musicIndex]);
     }
 
+    private void DebugTrackChange(int songLoaded)
+    {
+        int index = 0;
+        while (index < songs[songLoaded].musicClips.Length)
+        {
+            DebugMessages.SimpleVariableOutput(this, currentTrack[index], nameof(currentTrack) + '[' + index + ']');
+            index++;
+        }
+        DebugMessages.SimpleVariableOutput(this, currentTrack, nameof(currentTrack));
+        DebugMessages.SimpleVariableOutput(this, songs[songLoaded], "songs[" + songLoaded + "]");
+    }
+
     public void ChangeMusicTrack(int trackToPlay)
     {
         musicSource.Stop();
@@ -151,15 +166,8 @@ public class BGMController : MonoBehaviour
         musicSource.volume = newVolume;
     }
 
-    private void DebugTrackChange(int songLoaded)
+    public static BGMController FindBGMController()
     {
-        int index = 0;
-        while (index < songs[songLoaded].musicClips.Length)
-        {
-            DebugMessages.SimpleVariableOutput(this, currentTrack[index], nameof(currentTrack) + '[' + index + ']');
-            index++;
-        }
-        DebugMessages.SimpleVariableOutput(this, currentTrack, nameof(currentTrack));
-        DebugMessages.SimpleVariableOutput(this, songs[0], "songs[" + songLoaded + "]");
+        return FindObjectOfType<BGMController>();
     }
 }

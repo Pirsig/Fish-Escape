@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip deathSound;
     private SoundController soundController;
+    private BGMController bgmController;
 
     [Header ("Obstacles")]
     [SerializeField]
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        bgmController = BGMController.FindBGMController();
         soundController = SoundController.FindSoundController();
     }
 
@@ -94,7 +96,11 @@ public class PlayerController : MonoBehaviour
         {
             soundController.PlaySound(deathSound);
         }
-        
+        if(bgmController != null)
+        {
+            bgmController.ChangeMusicTrack(2);
+        }
+
         PlayerDied?.Invoke();
     }
 }
